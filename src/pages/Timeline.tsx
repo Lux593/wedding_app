@@ -25,8 +25,8 @@ interface EventDetails {
   outfits?: {
     men: string[]
     women: string[]
-    colors: { name: string; hex: string }[]
-    tag: string
+    colors: { nameKey: string; hex: string }[]
+    tagKey: string
   }
   dj?: string
   drinks?: string[]
@@ -71,15 +71,15 @@ export default function Timeline() {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
-          men: ['Anzug oder Sakko', 'Helle Hemden', 'Eleganter Schuhwerk'],
-          women: ['Kleid oder Kostüm', 'Hüte oder Fascinator optional', 'Elegante Schuhe'],
+          men: ['outfits.rec.suitJacket', 'outfits.rec.lightShirts', 'outfits.rec.elegantFootwear'],
+          women: ['outfits.rec.dressOrSuit', 'outfits.rec.hatsOptional', 'outfits.rec.elegantShoes'],
           colors: [
-            { name: 'Blau', hex: '#3B82F6' },
-            { name: 'Grau', hex: '#6B7280' },
-            { name: 'Beige', hex: '#D4A574' },
-            { name: 'Weiß', hex: '#FFFFFF' },
+            { nameKey: 'outfits.color.blue', hex: '#3B82F6' },
+            { nameKey: 'outfits.color.gray', hex: '#6B7280' },
+            { nameKey: 'outfits.color.beige', hex: '#D4A574' },
+            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
           ],
-          tag: 'Formal',
+          tagKey: 'outfits.tag.formal',
         },
         expectations: [
           'Feierliche Zeremonie im Freien',
@@ -108,14 +108,14 @@ export default function Timeline() {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
-          men: ['Sakko ohne Krawatte', 'Helle Hemden', 'Leder-Sneaker'],
-          women: ['Cocktail-Kleid', 'Elegante Bluse mit Rock', 'Wedge-Sandalen'],
+          men: ['outfits.rec.jacketNoTie', 'outfits.rec.lightShirts', 'outfits.rec.leatherSneakers'],
+          women: ['outfits.rec.cocktailDress', 'outfits.rec.blouseSkirt', 'outfits.rec.wedgeSandals'],
           colors: [
-            { name: 'Pastelltöne', hex: '#FBCFE8' },
-            { name: 'Gold-Akzente', hex: '#FCD34D' },
-            { name: 'Weiß', hex: '#FFFFFF' },
+            { nameKey: 'outfits.color.pastel', hex: '#FBCFE8' },
+            { nameKey: 'outfits.color.goldAccent', hex: '#FCD34D' },
+            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
           ],
-          tag: 'Smart Casual',
+          tagKey: 'outfits.tag.smartCasual',
         },
         drinks: [
           'Champagner',
@@ -158,15 +158,15 @@ export default function Timeline() {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
-          men: ['Anzug oder Sakko', 'Helle Hemden', 'Eleganter Schuhwerk'],
-          women: ['Kleid oder Kostüm', 'Elegante Accessoires', 'Elegante Schuhe'],
+          men: ['outfits.rec.suitJacket', 'outfits.rec.lightShirts', 'outfits.rec.elegantFootwear'],
+          women: ['outfits.rec.dressOrSuit', 'outfits.rec.elegantAccessories', 'outfits.rec.elegantShoes'],
           colors: [
-            { name: 'Blau', hex: '#3B82F6' },
-            { name: 'Grau', hex: '#6B7280' },
-            { name: 'Beige', hex: '#D4A574' },
-            { name: 'Weiß', hex: '#FFFFFF' },
+            { nameKey: 'outfits.color.blue', hex: '#3B82F6' },
+            { nameKey: 'outfits.color.gray', hex: '#6B7280' },
+            { nameKey: 'outfits.color.beige', hex: '#D4A574' },
+            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
           ],
-          tag: 'Formal',
+          tagKey: 'outfits.tag.formal',
         },
         expectations: [
           'Gruppenfotos mit allen Gästen',
@@ -196,15 +196,15 @@ export default function Timeline() {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
-          men: ['Dunkler Anzug', 'Krawatte oder Fliege', 'Leder-Schuhe'],
-          women: ['Festliches Kleid', 'Elegante Accessoires', 'Absätze'],
+          men: ['outfits.rec.darkSuit', 'outfits.rec.tieBow', 'outfits.rec.leatherShoes'],
+          women: ['outfits.rec.festiveDress', 'outfits.rec.elegantAccessories', 'outfits.rec.heels'],
           colors: [
-            { name: 'Dunkelblau', hex: '#1E3A8A' },
-            { name: 'Schwarz', hex: '#000000' },
-            { name: 'Gold-Akzente', hex: '#FCD34D' },
-            { name: 'Weiß', hex: '#FFFFFF' },
+            { nameKey: 'outfits.color.darkBlue', hex: '#1E3A8A' },
+            { nameKey: 'outfits.color.black', hex: '#000000' },
+            { nameKey: 'outfits.color.goldAccent', hex: '#FCD34D' },
+            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
           ],
-          tag: 'Festive',
+          tagKey: 'outfits.tag.festive',
         },
         drinks: [
           'Weißwein',
@@ -247,14 +247,14 @@ export default function Timeline() {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
-          men: ['Sakko ausziehen möglich', 'Bequeme Schuhe', 'Lockere Hemden'],
-          women: ['Bequeme Schuhe zum Tanzen', 'Kleid bleibt festlich', 'Optional: Wechsel-Schuhe'],
+          men: ['outfits.rec.jacketOff', 'outfits.rec.comfortableShoes', 'outfits.rec.looseShirts'],
+          women: ['outfits.rec.dancingShoes', 'outfits.rec.dressStays', 'outfits.rec.changeShoes'],
           colors: [
-            { name: 'Alle Farben', hex: '#9333EA' },
-            { name: 'Gold-Akzente', hex: '#FCD34D' },
-            { name: 'Festlich', hex: '#EC4899' },
+            { nameKey: 'outfits.color.allColors', hex: '#9333EA' },
+            { nameKey: 'outfits.color.goldAccent', hex: '#FCD34D' },
+            { nameKey: 'outfits.color.festive', hex: '#EC4899' },
           ],
-          tag: 'Party',
+          tagKey: 'outfits.tag.party',
         },
         dj: 'DJ Soundwave',
         drinks: [
@@ -299,15 +299,15 @@ export default function Timeline() {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
-          men: ['Casual Sakko oder Pullover', 'Jeans oder Chinos', 'Bequeme Schuhe'],
-          women: ['Casual Kleid oder Bluse mit Jeans', 'Bequeme Schuhe', 'Lässige Accessoires'],
+          men: ['outfits.rec.casualJacket', 'outfits.rec.jeansChinos', 'outfits.rec.comfortableShoes'],
+          women: ['outfits.rec.casualDress', 'outfits.rec.comfortableShoes', 'outfits.rec.casualAccessories'],
           colors: [
-            { name: 'Beige', hex: '#D4A574' },
-            { name: 'Creme', hex: '#FFF2CC' },
-            { name: 'Pastelltöne', hex: '#FBCFE8' },
-            { name: 'Weiß', hex: '#FFFFFF' },
+            { nameKey: 'outfits.color.beige', hex: '#D4A574' },
+            { nameKey: 'outfits.color.cream', hex: '#FFF2CC' },
+            { nameKey: 'outfits.color.pastel', hex: '#FBCFE8' },
+            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
           ],
-          tag: 'Casual',
+          tagKey: 'outfits.tag.casual',
         },
         drinks: [
           'Kaffee',
@@ -363,13 +363,17 @@ export default function Timeline() {
             </p>
           </div>
 
-      {/* Events grouped by date */}
-      <div className="space-y-6 md:space-y-8">
-        {dateOrder.map((date) => {
+      {/* Events grouped by date – Zeitstrahl verbindet die Kacheln inkl. oberer/unterer Verbindungspunkte */}
+      <div className="relative pt-[36px] pb-[36px]">
+        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-300 dark:from-gold-600 dark:via-gold-500 dark:to-gold-600 z-0" aria-hidden />
+        <div className="space-y-6 md:space-y-8 relative z-10">
+        {dateOrder.map((date, index) => {
           const dayEvents = eventsByDate[date] || []
           if (dayEvents.length === 0) return null
 
           const isOpen = openDates.has(date)
+          const isFirst = index === 0
+          const isLast = index === dateOrder.length - 1
 
           const toggleDate = () => {
             const newOpenDates = new Set(openDates)
@@ -382,28 +386,44 @@ export default function Timeline() {
           }
 
           return (
-            <div key={date} className="space-y-4">
-              {/* Date Header – gleiches Design wie Mainpage „Entdecke unsere Hochzeit“ */}
-              <button
-                onClick={toggleDate}
-                className="w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
-              >
-                <div className="flex items-center justify-center space-x-4">
-                  <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
-                    {t(`timeline.date.${date}`)}
-                  </h2>
-                  {isOpen ? (
-                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  ) : (
-                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  )}
-                </div>
-                <div className="flex items-center justify-center space-x-2 mt-3">
-                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <MdEventNote className="w-3 h-3 text-gold-500 dark:text-gold-400" />
-                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                </div>
-              </button>
+            <div key={date} className="relative space-y-4">
+              {/* Knotenpunkt oberhalb der ersten Kachel: 10px Abstand (Knoten-Oberkante 26px über Kachel = 10px Lücke) */}
+              {isFirst && (
+                <div
+                  className="absolute left-1/2 -top-[36px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  aria-hidden
+                />
+              )}
+              {/* Date Header – bei letzter Kachel in Wrapper, damit unterer Knoten exakt 10px unter Kachelkante liegt */}
+              <div className={isLast ? 'relative w-full' : ''}>
+                <button
+                  onClick={toggleDate}
+                  className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                >
+                  <div className="flex items-center justify-center space-x-4">
+                    <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
+                      {t(`timeline.date.${date}`)}
+                    </h2>
+                    {isOpen ? (
+                      <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    ) : (
+                      <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    )}
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 mt-3">
+                    <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                    <MdEventNote className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                    <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                  </div>
+                </button>
+                {/* Knotenpunkt unterhalb der letzten Kachel: 10px Abstand (Knoten 10px unter Kachel-Unterkante) */}
+                {isLast && (
+                  <div
+                    className="absolute left-1/2 top-full mt-5 -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
+                    aria-hidden
+                  />
+                )}
+              </div>
 
               {/* Events Grid for this date - Only show if open */}
               {isOpen && (
@@ -469,6 +489,7 @@ export default function Timeline() {
             </div>
           )
         })}
+        </div>
         </div>
         </div>
       )}
@@ -559,31 +580,31 @@ export default function Timeline() {
                   </div>
                   <div className="ml-14 space-y-4">
                     <div className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-sm font-serif font-semibold rounded-full border border-cream-300 dark:border-cream-600">
-                      {selectedEvent.details.outfits.tag}
+                      {t(selectedEvent.details.outfits.tagKey)}
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-2">
-                          {t('outfits.men') || 'For Men'}
+                          {t('outfits.men')}
                         </h4>
                         <ul className="space-y-2">
-                          {selectedEvent.details.outfits.men.map((item, i) => (
+                          {selectedEvent.details.outfits.men.map((itemKey, i) => (
                             <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
                               <Sparkles className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
-                              <span className="text-base font-serif">{item}</span>
+                              <span className="text-base font-serif">{t(itemKey)}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
                         <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-2">
-                          {t('outfits.women') || 'For Women'}
+                          {t('outfits.women')}
                         </h4>
                         <ul className="space-y-2">
-                          {selectedEvent.details.outfits.women.map((item, i) => (
+                          {selectedEvent.details.outfits.women.map((itemKey, i) => (
                             <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
                               <Sparkles className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
-                              <span className="text-base font-serif">{item}</span>
+                              <span className="text-base font-serif">{t(itemKey)}</span>
                             </li>
                           ))}
                         </ul>
@@ -591,7 +612,7 @@ export default function Timeline() {
                     </div>
                     <div>
                       <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-3">
-                        {t('outfits.colors') || 'Suggested Colors'}
+                        {t('outfits.colors')}
                       </h4>
                       <div className="flex flex-wrap gap-3">
                         {selectedEvent.details.outfits.colors.map((color, i) => (
@@ -603,7 +624,7 @@ export default function Timeline() {
                               className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
                               style={{ backgroundColor: color.hex }}
                             ></div>
-                            <span className="text-sm font-serif text-gray-700 dark:text-gray-300">{color.name}</span>
+                            <span className="text-sm font-serif text-gray-700 dark:text-gray-300">{t(color.nameKey)}</span>
                           </div>
                         ))}
                       </div>

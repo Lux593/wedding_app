@@ -79,13 +79,17 @@ export default function Locations() {
         </p>
       </div>
 
-      {/* Locations grouped by date */}
-      <div className="space-y-6 md:space-y-8">
-        {dateOrder.map((date) => {
+      {/* Locations grouped by date – Zeitstrahl verbindet die Kacheln inkl. oberer/unterer Verbindungspunkte */}
+      <div className="relative pt-[36px] pb-[36px]">
+        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-300 dark:from-gold-600 dark:via-gold-500 dark:to-gold-600 z-0" aria-hidden />
+        <div className="space-y-6 md:space-y-8 relative z-10">
+        {dateOrder.map((date, index) => {
           const dayLocations = locationsByDate[date] || []
           if (dayLocations.length === 0) return null
 
           const isOpen = openDates.has(date)
+          const isFirst = index === 0
+          const isLast = index === dateOrder.length - 1
 
           const toggleDate = () => {
             const newOpenDates = new Set(openDates)
@@ -98,28 +102,42 @@ export default function Locations() {
           }
 
           return (
-            <div key={date} className="space-y-4">
-              {/* Date Header – gleiches Design wie Mainpage „Entdecke unsere Hochzeit“ */}
-              <button
-                onClick={toggleDate}
-                className="w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
-              >
-                <div className="flex items-center justify-center space-x-4">
-                  <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
-                    {t(`timeline.date.${date}`)}
-                  </h2>
-                  {isOpen ? (
-                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  ) : (
-                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  )}
-                </div>
-                <div className="flex items-center justify-center space-x-2 mt-3">
-                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <MdLocationOn className="w-3 h-3 text-gold-500 dark:text-gold-400" />
-                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                </div>
-              </button>
+            <div key={date} className="relative space-y-4">
+              {isFirst && (
+                <div
+                  className="absolute left-1/2 -top-[36px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  aria-hidden
+                />
+              )}
+              {/* Date Header – bei letzter Kachel in Wrapper, damit unterer Knoten exakt 10px unter Kachelkante liegt */}
+              <div className={isLast ? 'relative w-full' : ''}>
+                <button
+                  onClick={toggleDate}
+                  className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                >
+                  <div className="flex items-center justify-center space-x-4">
+                    <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
+                      {t(`timeline.date.${date}`)}
+                    </h2>
+                    {isOpen ? (
+                      <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    ) : (
+                      <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    )}
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 mt-3">
+                    <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                    <MdLocationOn className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                    <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                  </div>
+                </button>
+                {isLast && (
+                  <div
+                    className="absolute left-1/2 top-full mt-5 -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
+                    aria-hidden
+                  />
+                )}
+              </div>
 
               {/* Locations for this date - Only show if open */}
               {isOpen && (
@@ -203,6 +221,7 @@ export default function Locations() {
             </div>
           )
         })}
+        </div>
       </div>
     </div>
   )
