@@ -21,14 +21,14 @@ export default function Home() {
   ]
 
   return (
-    <div className="space-y-8 md:space-y-16">
-      {/* Hero Section */}
-      <section className="text-center space-y-6 py-4 md:py-8 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-32 h-32 opacity-10 dark:opacity-5">
+    <div className="space-y-8 md:space-y-16 -mt-8 md:-mt-12">
+      {/* Hero Section – weniger Abstand Kopfzeile→2026 */}
+      <section className="text-center space-y-6 py-1 md:py-2 relative overflow-hidden">
+        {/* Decorative elements – klein, Sparkle hinter „Rahul“, Herz hinter „Simren“ */}
+        <div className="absolute left-[12%] top-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 opacity-10 dark:opacity-5 pointer-events-none" aria-hidden>
           <Sparkles className="w-full h-full text-gold-500" />
         </div>
-        <div className="absolute bottom-0 right-0 w-40 h-40 opacity-10 dark:opacity-5">
+        <div className="absolute right-[12%] top-1/2 -translate-y-1/2 w-24 h-24 md:w-28 md:h-28 opacity-10 dark:opacity-5 pointer-events-none" aria-hidden>
           <Heart className="w-full h-full text-gold-500" />
         </div>
 
@@ -36,7 +36,7 @@ export default function Home() {
           <div className="inline-flex items-center space-x-2 mb-4">
             <Sparkles className="w-5 h-5 text-gold-500 dark:text-gold-400 animate-pulse" />
             <span className="text-sm font-medium text-gold-600 dark:text-gold-500 uppercase tracking-wider">
-              {new Date().getFullYear()}
+              {t('home.wedding')} {new Date().getFullYear()}
             </span>
             <Sparkles className="w-5 h-5 text-gold-500 dark:text-gold-400 animate-pulse" />
           </div>
@@ -53,8 +53,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Welcome Message */}
-      <section className="max-w-[64.4rem] mx-auto text-center py-8 md:py-12 relative -mt-4 md:-mt-8">
+      {/* Welcome Message – weniger Abstand Herz-Icon→Willkommens-Box */}
+      <section className="max-w-[64.4rem] mx-auto text-center py-8 md:py-12 relative -mt-20 md:-mt-28">
         <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-cream-300 dark:border-cream-600">
           {/* Background Image */}
           <div className="absolute inset-0">
@@ -67,8 +67,8 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/15 to-black/20"></div>
           </div>
           
-          {/* Content */}
-          <div className="relative bg-transparent rounded-3xl p-8 md:p-16">
+          {/* Content – mehr Abstand oben, damit Herz-Icon nicht abgeschnitten */}
+          <div className="relative bg-transparent rounded-3xl pt-14 pb-8 px-8 md:pt-20 md:pb-16 md:px-16">
             <div className="flex justify-center mb-6">
               <div className="p-4 bg-white/20 dark:bg-white/10 rounded-full backdrop-blur-sm border border-white/30">
                 <Heart className="w-8 h-8 text-white" />

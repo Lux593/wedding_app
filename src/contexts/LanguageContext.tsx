@@ -23,6 +23,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Home
     'home.title': 'Rahul & Simren',
+    'home.wedding': 'Hochzeit',
     'home.subtitle': 'Wir freuen uns, dich an unserem besonderen Tag begrüßen zu dürfen',
     'home.discover': 'Entdecke unsere Hochzeit',
     'home.welcome': 'Willkommen',
@@ -125,6 +126,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Home
     'home.title': 'Rahul & Simren',
+    'home.wedding': 'Wedding',
     'home.subtitle': 'We are delighted to welcome you on our special day',
     'home.discover': 'Discover our wedding',
     'home.welcome': 'Welcome',
@@ -227,6 +229,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Home
     'home.title': 'Rahul & Simren',
+    'home.wedding': 'Mariage',
     'home.subtitle': 'Nous sommes ravis de vous accueillir en ce jour spécial',
     'home.discover': 'Découvrez notre mariage',
     'home.welcome': 'Bienvenue',
