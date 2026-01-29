@@ -383,10 +383,10 @@ export default function Timeline() {
 
           return (
             <div key={date} className="space-y-4">
-              {/* Date Header - Clickable */}
+              {/* Date Header – gleiches Design wie Mainpage „Entdecke unsere Hochzeit“ */}
               <button
                 onClick={toggleDate}
-                className="w-full text-center p-6 bg-gradient-to-r from-cream-200 to-cream-300 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
+                className="w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">

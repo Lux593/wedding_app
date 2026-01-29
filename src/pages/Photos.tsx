@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Sparkles } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { 
   MdPhotoCamera, 
   MdClose
@@ -27,6 +27,37 @@ export default function Photos() {
   const { t } = useLanguage()
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
+  const currentIndex = selectedImage !== null
+    ? weddingPhotos.findIndex((p) => p.id === selectedImage)
+    : -1
+  const hasPrev = currentIndex > 0
+  const hasNext = currentIndex >= 0 && currentIndex < weddingPhotos.length - 1
+
+  const goToPrev = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (hasPrev) setSelectedImage(weddingPhotos[currentIndex - 1].id)
+  }
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (hasNext) setSelectedImage(weddingPhotos[currentIndex + 1].id)
+  }
+
+  useEffect(() => {
+    if (selectedImage === null) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') goToPrev(e as unknown as React.MouseEvent)
+      if (e.key === 'ArrowRight') goToNext(e as unknown as React.MouseEvent)
+      if (e.key === 'Escape') setSelectedImage(null)
+    }
+    window.addEventListener('keydown', handleKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [selectedImage, currentIndex])
+
   const handleUploadClick = () => {
     // Zeige Meldung, dass die Funktion noch nicht aktiviert ist
     alert(t('photos.uploadNotAvailable') || 'Diese Funktion ist noch nicht aktiviert.')
@@ -52,7 +83,7 @@ export default function Photos() {
         <div className="flex justify-center">
           <button
             onClick={handleUploadClick}
-            className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 dark:from-gold-600 dark:to-gold-700 dark:hover:from-gold-700 dark:hover:to-gold-800 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
+            className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 dark:from-gold-600 dark:to-gold-700 dark:hover:from-gold-700 dark:hover:to-gold-800 text-white font-serif font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
           >
             <MdPhotoCamera className="w-5 h-5" />
             <span>{t('photos.upload') || 'Fotos hochladen'}</span>
@@ -81,23 +112,41 @@ export default function Photos() {
       {/* Lightbox Modal – Portal, damit nicht vom Layout abgeschnitten; scrollbar bei hohen Fotos */}
       {selectedImage !== null && createPortal(
         <div
-          className="fixed inset-0 top-0 z-50 bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-y-auto p-4 pt-16 pb-8 backdrop-blur-sm"
-          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 top-0 z-[70] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm"
         >
+          {/* Schließen-Button oben rechts, gleiches Design wie Vor/Zurück, fixiert */}
           <button
             onClick={() => setSelectedImage(null)}
             className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors backdrop-blur-sm border border-white/20 z-10"
-            aria-label="Close"
+            aria-label="Schließen"
           >
             <MdClose className="w-6 h-6" />
           </button>
-          <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0">
+          <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0 px-4" onClick={(e) => e.stopPropagation()}>
             <img
               src={weddingPhotos.find(img => img.id === selectedImage)?.url}
               alt={weddingPhotos.find(img => img.id === selectedImage)?.alt}
               className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-2xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
             />
+          </div>
+          {/* Vor/Zurück-Buttons fixiert am unteren Bildschirmrand */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={goToPrev}
+              disabled={!hasPrev}
+              className="p-3 bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-full transition-colors backdrop-blur-sm border border-white/20"
+              aria-label="Vorheriges Foto"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+            <button
+              onClick={goToNext}
+              disabled={!hasNext}
+              className="p-3 bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-full transition-colors backdrop-blur-sm border border-white/20"
+              aria-label="Nächstes Foto"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
           </div>
         </div>,
         document.body
@@ -106,11 +155,11 @@ export default function Photos() {
       {/* Info Message */}
       <div className="mt-16 text-center">
         <div className="inline-flex items-center space-x-3 px-6 py-4 bg-gold-50 dark:bg-gold-900/20 rounded-2xl border border-gold-200 dark:border-gold-800">
-          <Sparkles className="w-5 h-5 text-gold-600 dark:text-gold-400" />
-          <p className="text-gray-700 dark:text-gray-300 font-medium">
+          <MdPhotoCamera className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+          <p className="text-gray-700 dark:text-gray-300 font-serif font-medium">
             {t('photos.moreComing')}
           </p>
-          <Sparkles className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+          <MdPhotoCamera className="w-5 h-5 text-gold-600 dark:text-gold-400" />
         </div>
       </div>
     </div>

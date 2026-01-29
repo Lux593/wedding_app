@@ -82,7 +82,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
-      <header className="sticky top-0 z-[60] bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+      <header className="sticky top-0 z-[60] bg-gray-50/98 dark:bg-gray-950/98 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -234,7 +234,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Footer */}
       <footer className={`mt-16 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
+          <p className="text-center text-sm font-serif text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
             <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
             <span>{t('footer.text')}</span>
             <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />

@@ -99,10 +99,10 @@ export default function Locations() {
 
           return (
             <div key={date} className="space-y-4">
-              {/* Date Header - Clickable */}
+              {/* Date Header – gleiches Design wie Mainpage „Entdecke unsere Hochzeit“ */}
               <button
                 onClick={toggleDate}
-                className="w-full text-center p-6 bg-gradient-to-r from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
+                className="w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -154,10 +154,10 @@ export default function Locations() {
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-white drop-shadow-lg mb-2">
                     {t(location.nameKey)}
                   </h2>
-                  <p className="text-lg text-white/90 mb-1 drop-shadow-md">
+                  <p className="text-lg font-serif text-white/90 mb-1 drop-shadow-md">
                     {location.address}
                   </p>
-                  <p className="text-white/80 drop-shadow-md">
+                  <p className="font-serif text-white/80 drop-shadow-md">
                     {location.postalCode} {location.city}, {location.country}
                   </p>
                 </div>
@@ -188,7 +188,7 @@ export default function Locations() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 px-4 py-2 bg-gold-500 hover:bg-gold-600 dark:bg-gold-600 dark:hover:bg-gold-700 text-white font-medium text-sm rounded-lg transition-all hover:shadow-lg hover:scale-105"
+                  className="inline-flex items-center space-x-2 px-4 py-2 bg-gold-500 hover:bg-gold-600 dark:bg-gold-600 dark:hover:bg-gold-700 text-white font-serif font-medium text-sm rounded-lg transition-all hover:shadow-lg hover:scale-105"
                 >
                   <MdNavigation className="w-4 h-4" />
                   <span>{t('locations.directions')}</span>

@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react'
-import { Sparkles, Heart, AlertTriangle } from 'lucide-react'
+import { UserCheck, Heart, AlertTriangle } from 'lucide-react'
 import { 
   MdMarkEmailRead, 
   MdPeople, 
@@ -102,12 +102,12 @@ export default function RSVP() {
         </p>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
+      <div className="bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
         <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
           {/* Attending */}
           <div>
             <label className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
-              <Sparkles className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+              <UserCheck className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.attending')} *</span>
             </label>
             <div className="grid grid-cols-2 gap-4">
@@ -126,8 +126,8 @@ export default function RSVP() {
                 <div
                   className={`h-32 p-6 rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center ${
                     formData.attending === 'yes'
-                      ? 'border-gold-500 bg-gradient-to-br from-gold-50 to-gold-100 dark:from-gold-900/20 dark:to-gold-800/20 text-gold-700 dark:text-gold-400 shadow-lg scale-105'
-                      : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-700 hover:bg-gold-50/50 dark:hover:bg-gold-900/10'
+                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40'
+                      : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-600'
                   }`}
                 >
                   <div className="text-2xl mb-2">✓</div>
@@ -149,8 +149,8 @@ export default function RSVP() {
                 <div
                   className={`h-32 p-6 rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center ${
                     formData.attending === 'no'
-                      ? 'border-gold-500 bg-gradient-to-br from-gold-50 to-gold-100 dark:from-gold-900/20 dark:to-gold-800/20 text-gold-700 dark:text-gold-400 shadow-lg scale-105'
-                      : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-700 hover:bg-gold-50/50 dark:hover:bg-gold-900/10'
+                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40'
+                      : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-600'
                   }`}
                 >
                   <div className="text-2xl mb-2">✗</div>

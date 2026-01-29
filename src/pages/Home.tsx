@@ -106,7 +106,7 @@ export default function Home() {
               <Link
                 key={link.path}
                 to={link.path}
-                className="group flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border border-cream-300 dark:border-gray-700 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 overflow-hidden"
+                className="group flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 overflow-hidden"
               >
                 <div className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-cream-100 dark:bg-gray-700 border-2 border-gold-300 dark:border-gold-600 flex items-center justify-center shadow-inner group-hover:bg-gold-500 group-hover:border-gold-500 dark:group-hover:bg-gold-600 dark:group-hover:border-gold-500 transition-all duration-300">
                   <Icon className="w-6 h-6 md:w-7 md:h-7 text-gold-600 dark:text-gold-400 group-hover:text-white transition-colors" />
