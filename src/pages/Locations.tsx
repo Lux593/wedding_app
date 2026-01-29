@@ -1,4 +1,3 @@
-import { Sparkles } from 'lucide-react'
 import { 
   MdLocationOn, 
   MdOpenInNew, 

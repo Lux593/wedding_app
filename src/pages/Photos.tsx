@@ -1,10 +1,8 @@
-import { useState, useRef } from 'react'
-import { Sparkles, Upload } from 'lucide-react'
+import { useState } from 'react'
+import { Sparkles } from 'lucide-react'
 import { 
   MdPhotoCamera, 
-  MdClose, 
-  MdImage,
-  MdCloudUpload
+  MdClose
 } from 'react-icons/md'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -27,16 +25,10 @@ const weddingPhotos = [
 export default function Photos() {
   const { t } = useLanguage()
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleUploadClick = () => {
     // Zeige Meldung, dass die Funktion noch nicht aktiviert ist
     alert(t('photos.uploadNotAvailable') || 'Diese Funktion ist noch nicht aktiviert.')
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Diese Funktion wird nicht mehr verwendet, da der Upload noch nicht aktiviert ist
-    e.target.value = '' // Reset file input
   }
 
   return (
@@ -58,7 +50,7 @@ export default function Photos() {
             onClick={handleUploadClick}
             className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 dark:from-gold-600 dark:to-gold-700 dark:hover:from-gold-700 dark:hover:to-gold-800 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
           >
-            <MdCloudUpload className="w-5 h-5" />
+            <MdPhotoCamera className="w-5 h-5" />
             <span>{t('photos.upload') || 'Fotos hochladen'}</span>
           </button>
         </div>

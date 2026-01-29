@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, ArrowRight, X, MapPin, Music, UtensilsCrossed, Wine } from 'lucide-react'
+import { Sparkles, ArrowRight, Music, UtensilsCrossed, Wine } from 'lucide-react'
 import { 
   MdEventNote, 
   MdAccessTime, 
@@ -37,7 +37,7 @@ interface TimelineEvent {
   time: string
   titleKey: string
   descKey: string
-  icon: typeof Calendar
+  icon: React.ComponentType<{ className?: string }>
   imageUrl: string
   bgColor: string
   buttonColor: string
@@ -287,7 +287,6 @@ export default function Timeline() {
       {/* Events Grid - Card Style with Images */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {events.map((event, index) => {
-          const Icon = event.icon
           return (
             <div
               key={index}

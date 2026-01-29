@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Heart } from 'lucide-react'
 import { 
   MdMarkEmailRead, 
   MdPeople, 
