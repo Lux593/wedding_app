@@ -45,15 +45,11 @@ export default function Home() {
             {t('home.title')}
           </h1>
           
-          <div className="flex items-center justify-center space-x-2 mb-6">
+          <div className="flex items-center justify-center space-x-2">
             <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
             <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
             <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
           </div>
-          
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {t('home.subtitle')}
-          </p>
         </div>
       </section>
 

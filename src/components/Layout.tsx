@@ -1,6 +1,6 @@
 import { useState, ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Heart } from 'lucide-react'
 import { 
   MdMenu, 
   MdClose, 
@@ -211,9 +211,9 @@ export default function Layout({ children }: LayoutProps) {
       <footer className="mt-16 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
-            <Sparkles className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+            <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
             <span>{t('footer.text')}</span>
-            <Sparkles className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+            <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           </p>
         </div>
       </footer>
