@@ -225,14 +225,14 @@ export default function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 min-h-[calc(100vh-12rem)] transition-all duration-300 ${isMenuOpen ? 'md:blur-none blur-md' : ''}`}>
+      <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 min-h-[calc(100vh-12rem)] transition-all duration-300 ${isMenuOpen ? 'md:blur-none blur-md pointer-events-none md:pointer-events-auto' : ''}`}>
         <div key={location.pathname} className="page-transition page-enter">
           {children}
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+      <footer className={`mt-16 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
             <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />

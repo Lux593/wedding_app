@@ -348,8 +348,8 @@ export default function Timeline() {
     <>
       {!selectedEvent && (
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12 md:mb-16 relative">
+          {/* Header – gleiche Breite wie RSVP (max-w-3xl), damit Subheader gleich wirkt */}
+          <div className="text-center mb-12 md:mb-16 relative max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
               {t('timeline.title')}
             </h1>
@@ -358,6 +358,9 @@ export default function Timeline() {
               <MdEventNote className="w-4 h-4 text-gold-500 dark:text-gold-400" />
               <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
             </div>
+            <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
+              {t('timeline.subheader')}
+            </p>
           </div>
 
       {/* Events grouped by date */}

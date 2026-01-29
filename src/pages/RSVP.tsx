@@ -97,6 +97,9 @@ export default function RSVP() {
           <MdMarkEmailRead className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-700"></div>
         </div>
+        <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
+          {t('rsvp.subheader')}
+        </p>
       </div>
 
       <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">

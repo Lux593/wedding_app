@@ -35,6 +35,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Timeline
     'timeline.title': 'Timeline',
+    'timeline.subheader': 'Zeitplan aller Veranstaltungen – von der Zeremonie bis zum Frühstück.',
     'timeline.ceremony': 'Zeremonie',
     'timeline.ceremonyDesc': 'Trauung im Garten',
     'timeline.cocktail': 'Cocktail Hour',
@@ -62,6 +63,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Locations
     'locations.title': 'Locations',
+    'locations.subheader': 'Alle Veranstaltungsorte mit Adressen und Karten – so findest du uns.',
     'locations.ceremony': 'Trauungszeremonie',
     'locations.reception': 'Hochzeitsfeier',
     'locations.breakfast': 'Frühstücksrestaurant',
@@ -69,6 +71,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Outfits
     'outfits.title': 'Outfit-Empfehlungen',
+    'outfits.subheader': 'Was anziehen? Hier findest du Stil-Tipps für jedes Event.',
     'outfits.men': 'Für Herren',
     'outfits.women': 'Für Damen',
     'outfits.colors': 'Empfohlene Farben',
@@ -80,6 +83,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // RSVP
     'rsvp.title': 'RSVP',
+    'rsvp.subheader': 'Gib uns bitte Bescheid, ob du dabei bist – und ob du Allergien oder Wünsche hast.',
     'rsvp.attending': 'Wirst du teilnehmen?',
     'rsvp.yes': 'Ja, ich komme',
     'rsvp.no': 'Nein, ich kann nicht',
@@ -102,6 +106,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Photos
     'photos.title': 'Photos',
+    'photos.subheader': 'Hochzeitsmomente zum Anschauen und später eigene Fotos hochladen.',
     'photos.moreComing': 'Weitere Fotos werden nach der Hochzeit hinzugefügt.',
     'photos.upload': 'Fotos hochladen',
     'photos.uploadNotAvailable': 'Diese Funktion ist noch nicht aktiviert.',
@@ -132,6 +137,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Timeline
     'timeline.title': 'Timeline',
+    'timeline.subheader': 'Schedule of all events – from the ceremony to breakfast.',
     'timeline.ceremony': 'Ceremony',
     'timeline.ceremonyDesc': 'Wedding in the garden',
     'timeline.cocktail': 'Cocktail Hour',
@@ -159,6 +165,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Locations
     'locations.title': 'Locations',
+    'locations.subheader': 'All venues with addresses and maps – find your way to us.',
     'locations.ceremony': 'Wedding Ceremony',
     'locations.reception': 'Wedding Reception',
     'locations.breakfast': 'Breakfast Restaurant',
@@ -166,6 +173,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Outfits
     'outfits.title': 'Outfit Recommendations',
+    'outfits.subheader': 'What to wear? Style tips for every event.',
     'outfits.men': 'For Gentlemen',
     'outfits.women': 'For Ladies',
     'outfits.colors': 'Recommended Colors',
@@ -177,6 +185,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // RSVP
     'rsvp.title': 'RSVP',
+    'rsvp.subheader': 'Please let us know if you can join – and any allergies or special requests.',
     'rsvp.attending': 'Will you be attending?',
     'rsvp.yes': 'Yes, I will attend',
     'rsvp.no': 'No, I cannot attend',
@@ -199,6 +208,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Photos
     'photos.title': 'Photos',
+    'photos.subheader': 'Wedding moments to browse – and upload your own photos later.',
     'photos.moreComing': 'More photos will be added after the wedding.',
     'photos.upload': 'Upload Photos',
     'photos.uploadNotAvailable': 'This feature is not yet activated.',
@@ -229,6 +239,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Timeline
     'timeline.title': 'Programme',
+    'timeline.subheader': 'Calendrier de tous les événements – de la cérémonie au petit-déjeuner.',
     'timeline.ceremony': 'Cérémonie',
     'timeline.ceremonyDesc': 'Mariage dans le jardin',
     'timeline.cocktail': 'Cocktail',
@@ -256,6 +267,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Locations
     'locations.title': 'Lieux',
+    'locations.subheader': 'Tous les lieux avec adresses et plans – pour nous retrouver.',
     'locations.ceremony': 'Cérémonie de mariage',
     'locations.reception': 'Réception de mariage',
     'locations.breakfast': 'Restaurant petit-déjeuner',
@@ -263,6 +275,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Outfits
     'outfits.title': 'Recommandations de tenue',
+    'outfits.subheader': 'Quoi porter? Conseils de style pour chaque moment.',
     'outfits.men': 'Pour les hommes',
     'outfits.women': 'Pour les femmes',
     'outfits.colors': 'Couleurs recommandées',
@@ -274,6 +287,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // RSVP
     'rsvp.title': 'RSVP',
+    'rsvp.subheader': 'Dites-nous si vous serez des nôtres – et allergies ou souhaits particuliers.',
     'rsvp.attending': 'Serez-vous présent?',
     'rsvp.yes': 'Oui, je serai présent',
     'rsvp.no': 'Non, je ne peux pas',
@@ -296,6 +310,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Photos
     'photos.title': 'Photos',
+    'photos.subheader': 'Moments du mariage à parcourir – et téléchargez vos photos plus tard.',
     'photos.moreComing': 'Plus de photos seront ajoutées après le mariage.',
     'photos.upload': 'Télécharger des photos',
     'photos.uploadNotAvailable': 'Cette fonctionnalité n\'est pas encore activée.',

@@ -64,8 +64,8 @@ export default function Locations() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* Header */}
-      <div className="text-center mb-12 md:mb-16 relative">
+      {/* Header – gleiche Breite wie RSVP, damit Subheader einheitlich wirkt */}
+      <div className="text-center mb-12 md:mb-16 relative max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
           {t('locations.title')}
         </h1>
@@ -74,6 +74,9 @@ export default function Locations() {
           <MdLocationOn className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
         </div>
+        <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
+          {t('locations.subheader')}
+        </p>
       </div>
 
       {/* Locations grouped by date */}
