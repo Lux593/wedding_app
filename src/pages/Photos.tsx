@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Sparkles } from 'lucide-react'
 import { 
   MdPhotoCamera, 
@@ -74,28 +75,29 @@ export default function Photos() {
         ))}
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedImage !== null && (
+      {/* Lightbox Modal – Portal, damit nicht vom Layout abgeschnitten; scrollbar bei hohen Fotos */}
+      {selectedImage !== null && createPortal(
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 top-0 z-50 bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-y-auto p-4 pt-16 pb-8 backdrop-blur-sm"
           onClick={() => setSelectedImage(null)}
         >
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors backdrop-blur-sm border border-white/20"
+            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors backdrop-blur-sm border border-white/20 z-10"
             aria-label="Close"
           >
             <MdClose className="w-6 h-6" />
           </button>
-          <div className="max-w-6xl max-h-[90vh] relative">
+          <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0">
             <img
               src={weddingPhotos.find(img => img.id === selectedImage)?.url}
               alt={weddingPhotos.find(img => img.id === selectedImage)?.alt}
-              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+              className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-2xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Info Message */}
