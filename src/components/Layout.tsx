@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sparkles, Heart } from 'lucide-react'
 import { 
@@ -79,6 +79,24 @@ export default function Layout({ children }: LayoutProps) {
 
   const isActive = (path: string) => location.pathname === path
 
+  // Nur eine der beiden Overlays offen: Sidebar öffnen → Sprachauswahl schließen; Sprachauswahl öffnen → Sidebar schließen
+  const openMenu = () => {
+    setIsLangMenuOpen(false)
+    setIsMenuOpen(true)
+  }
+  const openLangMenu = () => {
+    setIsMenuOpen(false)
+    setIsLangMenuOpen(true)
+  }
+
+  // Bei geöffneter Sidebar Hintergrund nicht scrollbar, Backdrop bleibt klickbar
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [isMenuOpen])
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
@@ -117,7 +135,7 @@ export default function Layout({ children }: LayoutProps) {
               {/* Language Selector */}
               <div className="relative">
                 <button
-                  onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+                  onClick={() => (isLangMenuOpen ? setIsLangMenuOpen(false) : openLangMenu())}
                   className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center space-x-1"
                   aria-label="Change language"
                 >
@@ -171,7 +189,7 @@ export default function Layout({ children }: LayoutProps) {
 
               {/* Mobile Menu Button */}
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => (isMenuOpen ? setIsMenuOpen(false) : openMenu())}
                 className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 aria-label="Toggle menu"
               >
@@ -185,43 +203,6 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
-        {isMenuOpen && (
-          <>
-            {/* Backdrop - nur unter dem Header */}
-            <div 
-              className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-40 bg-black/20 dark:bg-black/30 mobile-menu-backdrop"
-              onClick={() => setIsMenuOpen(false)}
-            ></div>
-            
-            {/* Sidebar Menu */}
-            <div 
-              className="md:hidden fixed right-0 top-16 z-50 w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <nav className="px-4 py-6 space-y-2">
-                {navigation.map((item) => {
-                  const Icon = item.icon
-                  return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-serif font-medium transition-colors ${
-                        isActive(item.path)
-                          ? 'bg-gold-500 text-white dark:bg-gold-600'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                      }`}
-                    >
-                      <Icon className={`w-5 h-5 flex-shrink-0 ${isActive(item.path) ? 'text-white' : 'text-gold-500 dark:text-gold-400'}`} />
-                      <span>{t(item.key)}</span>
-                    </Link>
-                  )
-                })}
-              </nav>
-            </div>
-          </>
-        )}
       </header>
 
       {/* Main Content */}
@@ -230,6 +211,42 @@ export default function Layout({ children }: LayoutProps) {
           {children}
         </div>
       </main>
+
+      {/* Mobile Menu Overlay – nach Main gerendert, damit Backdrop Klicks erhält */}
+      {isMenuOpen && (
+        <>
+          <div
+            className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-40 bg-black/20 dark:bg-black/30 cursor-pointer"
+            onClick={() => setIsMenuOpen(false)}
+            aria-hidden
+          />
+          <div
+            className="md:hidden fixed right-0 top-16 z-50 w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <nav className="px-4 py-6 space-y-2">
+              {navigation.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-serif font-medium transition-colors ${
+                      isActive(item.path)
+                        ? 'bg-gold-500 text-white dark:bg-gold-600'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <Icon className={`w-5 h-5 flex-shrink-0 ${isActive(item.path) ? 'text-white' : 'text-gold-500 dark:text-gold-400'}`} />
+                    <span>{t(item.key)}</span>
+                  </Link>
+                )
+              })}
+            </nav>
+          </div>
+        </>
+      )}
 
       {/* Footer */}
       <footer className={`mt-16 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
