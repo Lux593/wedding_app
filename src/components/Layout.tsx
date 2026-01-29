@@ -6,7 +6,13 @@ import {
   MdClose, 
   MdLightMode, 
   MdDarkMode, 
-  MdLanguage
+  MdLanguage,
+  MdHome,
+  MdEventNote,
+  MdLocationOn,
+  MdCheckroom,
+  MdMarkEmailRead,
+  MdPhotoCamera
 } from 'react-icons/md'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLanguage, Language } from '../contexts/LanguageContext'
@@ -57,12 +63,12 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
 
   const navigation = [
-    { name: t('nav.home'), path: '/', key: 'nav.home' },
-    { name: t('nav.timeline'), path: '/timeline', key: 'nav.timeline' },
-    { name: t('nav.locations'), path: '/locations', key: 'nav.locations' },
-    { name: t('nav.outfits'), path: '/outfits', key: 'nav.outfits' },
-    { name: t('nav.rsvp'), path: '/rsvp', key: 'nav.rsvp' },
-    { name: t('nav.photos'), path: '/photos', key: 'nav.photos' },
+    { name: t('nav.home'), path: '/', key: 'nav.home', icon: MdHome },
+    { name: t('nav.timeline'), path: '/timeline', key: 'nav.timeline', icon: MdEventNote },
+    { name: t('nav.locations'), path: '/locations', key: 'nav.locations', icon: MdLocationOn },
+    { name: t('nav.outfits'), path: '/outfits', key: 'nav.outfits', icon: MdCheckroom },
+    { name: t('nav.rsvp'), path: '/rsvp', key: 'nav.rsvp', icon: MdMarkEmailRead },
+    { name: t('nav.photos'), path: '/photos', key: 'nav.photos', icon: MdPhotoCamera },
   ]
 
   const languages: { code: Language; name: string; flagComponent: ReactNode }[] = [
@@ -76,7 +82,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+      <header className="sticky top-0 z-[60] bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -179,32 +185,50 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-            <nav className="px-4 py-4 space-y-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                    isActive(item.path)
-                      ? 'bg-gold-500 text-white dark:bg-gold-600'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                >
-                  {t(item.key)}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <>
+            {/* Backdrop - nur unter dem Header */}
+            <div 
+              className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-40 bg-black/20 dark:bg-black/30 mobile-menu-backdrop"
+              onClick={() => setIsMenuOpen(false)}
+            ></div>
+            
+            {/* Sidebar Menu */}
+            <div 
+              className="md:hidden fixed right-0 top-16 z-50 w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <nav className="px-4 py-6 space-y-2">
+                {navigation.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                        isActive(item.path)
+                          ? 'bg-gold-500 text-white dark:bg-gold-600'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      <Icon className={`w-5 h-5 flex-shrink-0 ${isActive(item.path) ? 'text-white' : 'text-gold-500 dark:text-gold-400'}`} />
+                      <span>{t(item.key)}</span>
+                    </Link>
+                  )
+                })}
+              </nav>
+            </div>
+          </>
         )}
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 min-h-[calc(100vh-12rem)]">
-        {children}
+      <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 min-h-[calc(100vh-12rem)] transition-all duration-300 ${isMenuOpen ? 'md:blur-none blur-md' : ''}`}>
+        <div key={location.pathname} className="page-transition page-enter">
+          {children}
+        </div>
       </main>
 
       {/* Footer */}

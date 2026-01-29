@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import { 
   MdLocationOn, 
   MdOpenInNew, 
@@ -6,6 +8,7 @@ import {
 import { useLanguage } from '../contexts/LanguageContext'
 
 interface Location {
+  date: 'nov27' | 'nov28' | 'nov29'
   nameKey: string
   address: string
   city: string
@@ -16,9 +19,11 @@ interface Location {
 
 export default function Locations() {
   const { t } = useLanguage()
+  const [openDates, setOpenDates] = useState<Set<'nov27' | 'nov28' | 'nov29'>>(new Set())
 
   const locations: Location[] = [
     {
+      date: 'nov27',
       nameKey: 'locations.ceremony',
       address: 'Schlossgarten',
       city: 'Zürich',
@@ -27,6 +32,7 @@ export default function Locations() {
       mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
     },
     {
+      date: 'nov28',
       nameKey: 'locations.reception',
       address: 'Grand Hotel',
       city: 'Zürich',
@@ -34,7 +40,27 @@ export default function Locations() {
       country: 'Schweiz',
       mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
     },
+    {
+      date: 'nov29',
+      nameKey: 'locations.breakfast',
+      address: 'Café Bellevue',
+      city: 'Zürich',
+      postalCode: '8001',
+      country: 'Schweiz',
+      mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
+    },
   ]
+
+  // Group locations by date
+  const locationsByDate = locations.reduce((acc, location) => {
+    if (!acc[location.date]) {
+      acc[location.date] = []
+    }
+    acc[location.date].push(location)
+    return acc
+  }, {} as Record<'nov27' | 'nov28' | 'nov29', Location[]>)
+
+  const dateOrder: ('nov27' | 'nov28' | 'nov29')[] = ['nov27', 'nov28', 'nov29']
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -50,8 +76,52 @@ export default function Locations() {
         </div>
       </div>
 
-      <div className="space-y-8 md:space-y-12">
-        {locations.map((location, index) => (
+      {/* Locations grouped by date */}
+      <div className="space-y-6 md:space-y-8">
+        {dateOrder.map((date) => {
+          const dayLocations = locationsByDate[date] || []
+          if (dayLocations.length === 0) return null
+
+          const isOpen = openDates.has(date)
+
+          const toggleDate = () => {
+            const newOpenDates = new Set(openDates)
+            if (isOpen) {
+              newOpenDates.delete(date)
+            } else {
+              newOpenDates.add(date)
+            }
+            setOpenDates(newOpenDates)
+          }
+
+          return (
+            <div key={date} className="space-y-4">
+              {/* Date Header - Clickable */}
+              <button
+                onClick={toggleDate}
+                className="w-full text-center p-6 bg-gradient-to-r from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
+              >
+                <div className="flex items-center justify-center space-x-4">
+                  <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
+                    {t(`timeline.date.${date}`)}
+                  </h2>
+                  {isOpen ? (
+                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  )}
+                </div>
+                <div className="flex items-center justify-center space-x-2 mt-3">
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                  <MdLocationOn className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                </div>
+              </button>
+
+              {/* Locations for this date - Only show if open */}
+              {isOpen && (
+                <div className="space-y-8 md:space-y-12 mt-6">
+                {dayLocations.map((location, index) => (
           <div
             key={index}
             className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl border-2 border-cream-300/30 dark:border-cream-600/50 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:-translate-y-2"
@@ -59,9 +129,11 @@ export default function Locations() {
             {/* Background Image */}
             <div className="absolute inset-0">
               <img
-                src={index === 0 
+                src={location.nameKey === 'locations.ceremony'
                   ? 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80'
-                  : 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80'
+                  : location.nameKey === 'locations.reception'
+                  ? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80'
+                  : 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=1200&q=80'
                 }
                 alt={t(location.nameKey)}
                 className="w-full h-full object-cover"
@@ -122,7 +194,12 @@ export default function Locations() {
               </div>
             </div>
           </div>
-        ))}
+                ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

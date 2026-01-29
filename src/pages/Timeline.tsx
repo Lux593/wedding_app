@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, ArrowRight, Music, UtensilsCrossed, Wine } from 'lucide-react'
+import { Sparkles, ArrowRight, Music, UtensilsCrossed, Wine, ChevronDown, ChevronUp } from 'lucide-react'
 import { 
   MdEventNote, 
   MdAccessTime, 
@@ -34,6 +34,7 @@ interface EventDetails {
 }
 
 interface TimelineEvent {
+  date: 'nov27' | 'nov28' | 'nov29'
   time: string
   titleKey: string
   descKey: string
@@ -47,9 +48,11 @@ interface TimelineEvent {
 export default function Timeline() {
   const { t } = useLanguage()
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null)
+  const [openDates, setOpenDates] = useState<Set<'nov27' | 'nov28' | 'nov29'>>(new Set())
 
   const events: TimelineEvent[] = [
     {
+      date: 'nov27',
       time: '09:00',
       titleKey: 'timeline.ceremony',
       descKey: 'timeline.ceremonyDesc',
@@ -86,6 +89,7 @@ export default function Timeline() {
       },
     },
     {
+      date: 'nov27',
       time: '10:00',
       titleKey: 'timeline.cocktail',
       descKey: 'timeline.cocktailDesc',
@@ -134,6 +138,7 @@ export default function Timeline() {
       },
     },
     {
+      date: 'nov27',
       time: '11:30',
       titleKey: 'timeline.photos',
       descKey: 'timeline.photosDesc',
@@ -170,6 +175,7 @@ export default function Timeline() {
       },
     },
     {
+      date: 'nov28',
       time: '13:00',
       titleKey: 'timeline.dinner',
       descKey: 'timeline.dinnerDesc',
@@ -219,6 +225,7 @@ export default function Timeline() {
       },
     },
     {
+      date: 'nov28',
       time: '18:00',
       titleKey: 'timeline.party',
       descKey: 'timeline.partyDesc',
@@ -268,25 +275,132 @@ export default function Timeline() {
         ],
       },
     },
+    {
+      date: 'nov29',
+      time: '10:00',
+      titleKey: 'timeline.breakfast',
+      descKey: 'timeline.breakfastDesc',
+      icon: MdRestaurant,
+      imageUrl: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80',
+      bgColor: 'from-orange-900/40 to-amber-900/50',
+      buttonColor: 'from-orange-400/80 to-amber-500/80 hover:from-orange-400 hover:to-amber-500',
+      details: {
+        location: {
+          nameKey: 'locations.breakfast',
+          address: 'Café Bellevue',
+          city: 'Zürich',
+          postalCode: '8001',
+          country: 'Schweiz',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
+        },
+        outfits: {
+          men: ['Casual Sakko oder Pullover', 'Jeans oder Chinos', 'Bequeme Schuhe'],
+          women: ['Casual Kleid oder Bluse mit Jeans', 'Bequeme Schuhe', 'Lässige Accessoires'],
+          colors: [
+            { name: 'Beige', hex: '#D4A574' },
+            { name: 'Creme', hex: '#FFF2CC' },
+            { name: 'Pastelltöne', hex: '#FBCFE8' },
+            { name: 'Weiß', hex: '#FFFFFF' },
+          ],
+          tag: 'Casual',
+        },
+        drinks: [
+          'Kaffee',
+          'Tee',
+          'Frisch gepresste Säfte',
+          'Champagner',
+          'Mimosa',
+        ],
+        food: [
+          'Vollständiges Frühstücksbuffet',
+          'Eier nach Wahl',
+          'Frisches Obst',
+          'Croissants & Gebäck',
+          'Waffeln & Pancakes',
+        ],
+        expectations: [
+          'Entspannte Atmosphäre',
+          'Dauer: ca. 2-3 Stunden',
+          'Gemeinsamer Ausklang',
+          'Abschied von den Gästen',
+        ],
+      },
+    },
   ]
 
-  return (
-    <div className="max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="text-center mb-12 md:mb-16 relative">
-        <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-          {t('timeline.title')}
-        </h1>
-        <div className="flex items-center justify-center space-x-2">
-          <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
-          <MdEventNote className="w-4 h-4 text-gold-500 dark:text-gold-400" />
-          <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
-        </div>
-      </div>
+  // Group events by date
+  const eventsByDate = events.reduce((acc, event) => {
+    if (!acc[event.date]) {
+      acc[event.date] = []
+    }
+    acc[event.date].push(event)
+    return acc
+  }, {} as Record<'nov27' | 'nov28' | 'nov29', TimelineEvent[]>)
 
-      {/* Events Grid - Card Style with Images */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {events.map((event, index) => {
+  const dateOrder: ('nov27' | 'nov28' | 'nov29')[] = ['nov27', 'nov28', 'nov29']
+
+  return (
+    <>
+      {!selectedEvent && (
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12 md:mb-16 relative">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+              {t('timeline.title')}
+            </h1>
+            <div className="flex items-center justify-center space-x-2">
+              <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
+              <MdEventNote className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+              <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
+            </div>
+          </div>
+
+      {/* Events grouped by date */}
+      <div className="space-y-6 md:space-y-8">
+        {dateOrder.map((date) => {
+          const dayEvents = eventsByDate[date] || []
+          if (dayEvents.length === 0) return null
+
+          const isOpen = openDates.has(date)
+
+          const toggleDate = () => {
+            const newOpenDates = new Set(openDates)
+            if (isOpen) {
+              newOpenDates.delete(date)
+            } else {
+              newOpenDates.add(date)
+            }
+            setOpenDates(newOpenDates)
+          }
+
+          return (
+            <div key={date} className="space-y-4">
+              {/* Date Header - Clickable */}
+              <button
+                onClick={toggleDate}
+                className="w-full text-center p-6 bg-gradient-to-r from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
+              >
+                <div className="flex items-center justify-center space-x-4">
+                  <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
+                    {t(`timeline.date.${date}`)}
+                  </h2>
+                  {isOpen ? (
+                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  )}
+                </div>
+                <div className="flex items-center justify-center space-x-2 mt-3">
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                  <MdEventNote className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                </div>
+              </button>
+
+              {/* Events Grid for this date - Only show if open */}
+              {isOpen && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-6">
+                {dayEvents.map((event, index) => {
           return (
             <div
               key={index}
@@ -340,47 +454,53 @@ export default function Timeline() {
               {/* Decorative Bottom Accent */}
               <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${event.buttonColor.replace('/80', '').replace('hover:', '')} shadow-lg`}></div>
             </div>
+                )
+              })}
+                </div>
+              )}
+            </div>
           )
         })}
-      </div>
+        </div>
+        </div>
+      )}
 
       {/* Event Details Modal */}
       {selectedEvent && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedEvent(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors z-10"
-            >
-              <MdClose className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-            </button>
+        <div className="fixed inset-0 top-16 md:top-20 z-50 bg-white dark:bg-gray-900 overflow-y-auto rounded-t-3xl">
+          {/* Close Button */}
+          <button
+            onClick={() => setSelectedEvent(null)}
+            className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors z-20 shadow-lg"
+          >
+            <MdClose className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+          </button>
 
-            {/* Header with Image */}
-            <div className="relative h-64 overflow-hidden rounded-t-3xl">
-              <img
-                src={selectedEvent.imageUrl}
-                alt={t(selectedEvent.titleKey)}
-                className="w-full h-full object-cover"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-br ${selectedEvent.bgColor}`}></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <div className="flex items-center space-x-2 mb-2">
-                  <MdAccessTime className="w-5 h-5 text-cream-200" />
-                  <span className="text-lg font-semibold">{selectedEvent.time}</span>
-                </div>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold drop-shadow-lg">
-                  {t(selectedEvent.titleKey)}
-                </h2>
+          {/* Header with Image */}
+          <div className="relative h-64 overflow-hidden rounded-t-3xl">
+            <img
+              src={selectedEvent.imageUrl}
+              alt={t(selectedEvent.titleKey)}
+              className="w-full h-full object-cover"
+            />
+            <div className={`absolute inset-0 bg-gradient-to-br ${selectedEvent.bgColor}`}></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div className="absolute bottom-6 left-6 right-6 text-white">
+              <div className="flex items-center space-x-2 mb-2">
+                <MdAccessTime className="w-5 h-5 text-cream-200" />
+                <span className="text-lg font-semibold">{selectedEvent.time}</span>
               </div>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold drop-shadow-lg">
+                {t(selectedEvent.titleKey)}
+              </h2>
             </div>
+          </div>
 
-            {/* Content */}
-            <div className="p-6 md:p-8 space-y-8">
-              {/* Location */}
-              {selectedEvent.details.location && (
-                <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
+          {/* Content */}
+          <div className="p-6 md:p-8 space-y-8">
+            {/* Location */}
+            {selectedEvent.details.location && (
+              <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl">
                       <MdLocationOn className="w-6 h-6 text-white" />
@@ -418,9 +538,9 @@ export default function Timeline() {
                 </div>
               )}
 
-              {/* Outfits */}
-              {selectedEvent.details.outfits && (
-                <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
+            {/* Outfits */}
+            {selectedEvent.details.outfits && (
+              <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl">
                       <MdCheckroom className="w-6 h-6 text-white" />
@@ -484,9 +604,9 @@ export default function Timeline() {
                 </div>
               )}
 
-              {/* DJ */}
-              {selectedEvent.details.dj && (
-                <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
+            {/* DJ */}
+            {selectedEvent.details.dj && (
+              <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
                       <Music className="w-6 h-6 text-white" />
@@ -503,9 +623,9 @@ export default function Timeline() {
                 </div>
               )}
 
-              {/* Drinks */}
-              {selectedEvent.details.drinks && (
-                <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
+            {/* Drinks */}
+            {selectedEvent.details.drinks && (
+              <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
                       <Wine className="w-6 h-6 text-white" />
@@ -527,9 +647,9 @@ export default function Timeline() {
                 </div>
               )}
 
-              {/* Food */}
-              {selectedEvent.details.food && (
-                <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
+            {/* Food */}
+            {selectedEvent.details.food && (
+              <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl">
                       <UtensilsCrossed className="w-6 h-6 text-white" />
@@ -551,9 +671,9 @@ export default function Timeline() {
                 </div>
               )}
 
-              {/* Expectations */}
-              {selectedEvent.details.expectations && (
-                <div>
+            {/* Expectations */}
+            {selectedEvent.details.expectations && (
+              <div>
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl">
                       <Sparkles className="w-6 h-6 text-white" />
@@ -574,10 +694,9 @@ export default function Timeline() {
                   </div>
                 </div>
               )}
-            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

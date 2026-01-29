@@ -47,7 +47,12 @@ const translations: Record<Language, Record<string, string>> = {
     'timeline.dinnerDesc': 'Fünf-Gänge-Menü',
     'timeline.party': 'Tanz & Feier',
     'timeline.partyDesc': 'Party bis in die Nacht',
+    'timeline.breakfast': 'Hochzeits-Frühstück',
+    'timeline.breakfastDesc': 'Gemeinsames Frühstück zum Ausklang',
     'timeline.more': 'Mehr',
+    'timeline.date.nov27': '27. November 2026',
+    'timeline.date.nov28': '28. November 2026',
+    'timeline.date.nov29': '29. November 2026',
     'timeline.details.location': 'Location',
     'timeline.details.outfits': 'Outfit-Empfehlungen',
     'timeline.details.dj': 'DJ',
@@ -59,6 +64,7 @@ const translations: Record<Language, Record<string, string>> = {
     'locations.title': 'Locations',
     'locations.ceremony': 'Trauungszeremonie',
     'locations.reception': 'Hochzeitsfeier',
+    'locations.breakfast': 'Frühstücksrestaurant',
     'locations.directions': 'Route anzeigen',
     
     // Outfits
@@ -70,6 +76,7 @@ const translations: Record<Language, Record<string, string>> = {
     'outfits.smartCasual': 'Smart Casual für den Empfang',
     'outfits.festive': 'Festliche Kleidung für das Abendessen',
     'outfits.comfortable': 'Komfortable Kleidung zum Tanzen',
+    'outfits.casual': 'Lässige Kleidung für das Frühstück',
     
     // RSVP
     'rsvp.title': 'RSVP',
@@ -137,7 +144,12 @@ const translations: Record<Language, Record<string, string>> = {
     'timeline.dinnerDesc': 'Five-course menu',
     'timeline.party': 'Dance & Celebration',
     'timeline.partyDesc': 'Party until the night',
+    'timeline.breakfast': 'Wedding Breakfast',
+    'timeline.breakfastDesc': 'Joint breakfast to wind down',
     'timeline.more': 'More',
+    'timeline.date.nov27': 'November 27, 2026',
+    'timeline.date.nov28': 'November 28, 2026',
+    'timeline.date.nov29': 'November 29, 2026',
     'timeline.details.location': 'Location',
     'timeline.details.outfits': 'Outfit Recommendations',
     'timeline.details.dj': 'DJ',
@@ -149,6 +161,7 @@ const translations: Record<Language, Record<string, string>> = {
     'locations.title': 'Locations',
     'locations.ceremony': 'Wedding Ceremony',
     'locations.reception': 'Wedding Reception',
+    'locations.breakfast': 'Breakfast Restaurant',
     'locations.directions': 'Get directions',
     
     // Outfits
@@ -160,6 +173,7 @@ const translations: Record<Language, Record<string, string>> = {
     'outfits.smartCasual': 'Smart casual for the reception',
     'outfits.festive': 'Festive attire for dinner',
     'outfits.comfortable': 'Comfortable clothing for dancing',
+    'outfits.casual': 'Casual clothing for breakfast',
     
     // RSVP
     'rsvp.title': 'RSVP',
@@ -227,7 +241,12 @@ const translations: Record<Language, Record<string, string>> = {
     'timeline.dinnerDesc': 'Menu cinq services',
     'timeline.party': 'Danse & Célébration',
     'timeline.partyDesc': 'Fête jusqu\'à la nuit',
+    'timeline.breakfast': 'Petit-déjeuner de mariage',
+    'timeline.breakfastDesc': 'Petit-déjeuner commun pour conclure',
     'timeline.more': 'Plus',
+    'timeline.date.nov27': '27 novembre 2026',
+    'timeline.date.nov28': '28 novembre 2026',
+    'timeline.date.nov29': '29 novembre 2026',
     'timeline.details.location': 'Lieu',
     'timeline.details.outfits': 'Recommandations de tenue',
     'timeline.details.dj': 'DJ',
@@ -239,6 +258,7 @@ const translations: Record<Language, Record<string, string>> = {
     'locations.title': 'Lieux',
     'locations.ceremony': 'Cérémonie de mariage',
     'locations.reception': 'Réception de mariage',
+    'locations.breakfast': 'Restaurant petit-déjeuner',
     'locations.directions': 'Obtenir l\'itinéraire',
     
     // Outfits
@@ -250,6 +270,7 @@ const translations: Record<Language, Record<string, string>> = {
     'outfits.smartCasual': 'Smart casual pour la réception',
     'outfits.festive': 'Tenue festive pour le dîner',
     'outfits.comfortable': 'Vêtements confortables pour danser',
+    'outfits.casual': 'Tenue décontractée pour le petit-déjeuner',
     
     // RSVP
     'rsvp.title': 'RSVP',

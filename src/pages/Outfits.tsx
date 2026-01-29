@@ -1,13 +1,17 @@
-import { Sparkles } from 'lucide-react'
+import { Sparkles, ChevronDown, ChevronUp } from 'lucide-react'
 import { 
   MdCheckroom, 
-  MdEventNote, 
-  MdPerson
+  MdEventNote
 } from 'react-icons/md'
+import { 
+  FaMale,
+  FaFemale
+} from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useState } from 'react'
 
 interface OutfitSuggestion {
+  date: 'nov27' | 'nov28' | 'nov29'
   eventKey: string
   time: string
   descKey: string
@@ -24,9 +28,11 @@ interface OutfitSuggestion {
 export default function Outfits() {
   const { t } = useLanguage()
   const [activeTab, setActiveTab] = useState<'men' | 'women'>('men')
+  const [openDates, setOpenDates] = useState<Set<'nov27' | 'nov28' | 'nov29'>>(new Set())
 
   const outfitSuggestions: OutfitSuggestion[] = [
     {
+      date: 'nov27',
       eventKey: 'timeline.ceremony',
       time: '09:00 - 10:00',
       descKey: 'outfits.formal',
@@ -45,6 +51,7 @@ export default function Outfits() {
       womenOutfitImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&q=80',
     },
     {
+      date: 'nov27',
       eventKey: 'timeline.cocktail',
       time: '10:00 - 11:30',
       descKey: 'outfits.smartCasual',
@@ -62,6 +69,7 @@ export default function Outfits() {
       womenOutfitImage: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=80',
     },
     {
+      date: 'nov27',
       eventKey: 'timeline.photos',
       time: '11:30 - 12:30',
       descKey: 'outfits.formal',
@@ -80,6 +88,7 @@ export default function Outfits() {
       womenOutfitImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&q=80',
     },
     {
+      date: 'nov28',
       eventKey: 'timeline.dinner',
       time: '13:00 - 18:00',
       descKey: 'outfits.festive',
@@ -98,6 +107,7 @@ export default function Outfits() {
       womenOutfitImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&q=80',
     },
     {
+      date: 'nov28',
       eventKey: 'timeline.party',
       time: '18:00 - 24:00',
       descKey: 'outfits.comfortable',
@@ -114,7 +124,37 @@ export default function Outfits() {
       menOutfitImage: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&q=80',
       womenOutfitImage: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=80',
     },
+    {
+      date: 'nov29',
+      eventKey: 'timeline.breakfast',
+      time: '10:00 - 13:00',
+      descKey: 'outfits.casual',
+      recommendations: {
+        men: ['Casual Sakko oder Pullover', 'Jeans oder Chinos', 'Bequeme Schuhe'],
+        women: ['Casual Kleid oder Bluse mit Jeans', 'Bequeme Schuhe', 'Lässige Accessoires'],
+      },
+      colors: [
+        { name: 'Beige', hex: '#D4A574' },
+        { name: 'Creme', hex: '#FFF2CC' },
+        { name: 'Pastelltöne', hex: '#FBCFE8' },
+        { name: 'Weiß', hex: '#FFFFFF' },
+      ],
+      tag: 'Casual',
+      menOutfitImage: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&q=80',
+      womenOutfitImage: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=80',
+    },
   ]
+
+  // Group suggestions by date
+  const suggestionsByDate = outfitSuggestions.reduce((acc, suggestion) => {
+    if (!acc[suggestion.date]) {
+      acc[suggestion.date] = []
+    }
+    acc[suggestion.date].push(suggestion)
+    return acc
+  }, {} as Record<'nov27' | 'nov28' | 'nov29', OutfitSuggestion[]>)
+
+  const dateOrder: ('nov27' | 'nov28' | 'nov29')[] = ['nov27', 'nov28', 'nov29']
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -141,7 +181,7 @@ export default function Outfits() {
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
-            <MdPerson className="w-5 h-5" />
+            <FaMale className="w-5 h-5" />
             <span>{t('outfits.men')}</span>
           </button>
           <button
@@ -152,22 +192,62 @@ export default function Outfits() {
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
-            <MdPerson className="w-5 h-5" />
+            <FaFemale className="w-5 h-5" />
             <span>{t('outfits.women')}</span>
           </button>
         </div>
       </div>
 
-      {/* Outfit Suggestions */}
-      <div className="space-y-8 md:space-y-12">
-        {outfitSuggestions.map((suggestion, index) => (
-          <div
-            key={index}
-            className="group bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative overflow-hidden"
-          >
-            {/* Decorative background */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-cream-50 dark:bg-cream-700/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
+      {/* Outfit Suggestions grouped by date */}
+      <div className="space-y-6 md:space-y-8">
+        {dateOrder.map((date) => {
+          const daySuggestions = suggestionsByDate[date] || []
+          if (daySuggestions.length === 0) return null
+
+          const isOpen = openDates.has(date)
+
+          const toggleDate = () => {
+            const newOpenDates = new Set(openDates)
+            if (isOpen) {
+              newOpenDates.delete(date)
+            } else {
+              newOpenDates.add(date)
+            }
+            setOpenDates(newOpenDates)
+          }
+
+          return (
+            <div key={date} className="space-y-4">
+              {/* Date Header - Clickable */}
+              <button
+                onClick={toggleDate}
+                className="w-full text-center p-6 bg-gradient-to-r from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
+              >
+                <div className="flex items-center justify-center space-x-4">
+                  <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
+                    {t(`timeline.date.${date}`)}
+                  </h2>
+                  {isOpen ? (
+                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  )}
+                </div>
+                <div className="flex items-center justify-center space-x-2 mt-3">
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                  <MdCheckroom className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                </div>
+              </button>
+
+              {/* Outfit Suggestions for this date - Only show if open */}
+              {isOpen && (
+                <div className="space-y-8 md:space-y-12 mt-6">
+                  {daySuggestions.map((suggestion, index) => (
+                  <div
+                    key={index}
+                    className="group bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative overflow-hidden"
+                  >
             {/* Header */}
             <div className="flex items-start space-x-4 mb-6 relative z-10">
               <div className="p-4 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
@@ -238,8 +318,13 @@ export default function Outfits() {
                 ))}
               </div>
             </div>
-          </div>
-        ))}
+                  </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
