@@ -30,6 +30,7 @@ declare module 'react-icons/md' {
   export const MdLightMode: FC<SVGProps<SVGSVGElement>>
   export const MdDarkMode: FC<SVGProps<SVGSVGElement>>
   export const MdLanguage: FC<SVGProps<SVGSVGElement>>
+  export const MdHome: FC<SVGProps<SVGSVGElement>>
   export const MdRestaurant: FC<SVGProps<SVGSVGElement>>
   export const MdCelebration: FC<SVGProps<SVGSVGElement>>
   export const MdCameraAlt: FC<SVGProps<SVGSVGElement>>
