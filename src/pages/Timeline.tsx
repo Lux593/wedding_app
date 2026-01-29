@@ -105,6 +105,7 @@ export default function Timeline() {
           city: 'Zürich',
           postalCode: '8001',
           country: 'Schweiz',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
           men: ['Sakko ohne Krawatte', 'Helle Hemden', 'Leder-Sneaker'],
@@ -154,6 +155,7 @@ export default function Timeline() {
           city: 'Zürich',
           postalCode: '8001',
           country: 'Schweiz',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
           men: ['Anzug oder Sakko', 'Helle Hemden', 'Eleganter Schuhwerk'],
@@ -191,6 +193,7 @@ export default function Timeline() {
           city: 'Zürich',
           postalCode: '8001',
           country: 'Schweiz',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
           men: ['Dunkler Anzug', 'Krawatte oder Fliege', 'Leder-Schuhe'],
@@ -241,6 +244,7 @@ export default function Timeline() {
           city: 'Zürich',
           postalCode: '8001',
           country: 'Schweiz',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.1234567890!2d8.5456!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIyJzM2LjgiTiA4wrAzMic0NC4yIkU!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch',
         },
         outfits: {
           men: ['Sakko ausziehen möglich', 'Bequeme Schuhe', 'Lockere Hemden'],
@@ -379,7 +383,7 @@ export default function Timeline() {
               {/* Date Header - Clickable */}
               <button
                 onClick={toggleDate}
-                className="w-full text-center p-6 bg-gradient-to-r from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
+                className="w-full text-center p-6 bg-gradient-to-r from-cream-200 to-cream-300 dark:from-cream-700/30 dark:to-cream-600/30 rounded-2xl border-2 border-cream-300 dark:border-cream-600 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:shadow-lg group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -424,7 +428,7 @@ export default function Timeline() {
                 {/* Time - Top Right */}
                 <div className="flex items-center justify-end space-x-2 mb-4">
                   <MdAccessTime className="w-4 h-4 text-white dark:text-cream-300" />
-                  <span className="text-lg font-bold text-white drop-shadow-lg">
+                  <span className="text-lg font-serif font-bold text-white drop-shadow-lg">
                     {event.time}
                   </span>
                 </div>
@@ -438,14 +442,14 @@ export default function Timeline() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6 drop-shadow-md line-clamp-2">
+                <p className="text-white/90 font-serif text-base md:text-lg leading-relaxed mb-6 drop-shadow-md line-clamp-2">
                   {t(event.descKey)}
                 </p>
 
                 {/* More Button with Pastel Colors */}
                 <button 
                   onClick={() => setSelectedEvent(event)}
-                  className={`w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r ${event.buttonColor} text-white font-semibold text-sm rounded-lg transition-all shadow-lg hover:shadow-xl group-hover:scale-105 border-2 border-white/20 backdrop-blur-sm`}
+                  className={`w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r ${event.buttonColor} text-white font-serif font-semibold text-sm rounded-lg transition-all shadow-lg hover:shadow-xl group-hover:scale-105 border-2 border-white/20 backdrop-blur-sm`}
                 >
                   <span>{t('timeline.more') || 'More'}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -489,7 +493,7 @@ export default function Timeline() {
             <div className="absolute bottom-6 left-6 right-6 text-white">
               <div className="flex items-center space-x-2 mb-2">
                 <MdAccessTime className="w-5 h-5 text-cream-200" />
-                <span className="text-lg font-semibold">{selectedEvent.time}</span>
+                <span className="text-lg font-serif font-semibold">{selectedEvent.time}</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-serif font-bold drop-shadow-lg">
                 {t(selectedEvent.titleKey)}
@@ -511,13 +515,13 @@ export default function Timeline() {
                     </h3>
                   </div>
                   <div className="ml-14 space-y-2">
-                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <p className="text-lg font-serif font-semibold text-gray-900 dark:text-white">
                       {t(selectedEvent.details.location.nameKey)}
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300">
+                    <p className="font-serif text-gray-700 dark:text-gray-300">
                       {selectedEvent.details.location.address}
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300">
+                    <p className="font-serif text-gray-700 dark:text-gray-300">
                       {selectedEvent.details.location.postalCode} {selectedEvent.details.location.city}, {selectedEvent.details.location.country}
                     </p>
                     {selectedEvent.details.location.mapUrl && (
@@ -551,39 +555,39 @@ export default function Timeline() {
                     </h3>
                   </div>
                   <div className="ml-14 space-y-4">
-                    <div className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-sm font-semibold rounded-full border border-cream-300 dark:border-cream-600">
+                    <div className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-sm font-serif font-semibold rounded-full border border-cream-300 dark:border-cream-600">
                       {selectedEvent.details.outfits.tag}
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                        <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-2">
                           {t('outfits.men') || 'For Men'}
                         </h4>
                         <ul className="space-y-2">
                           {selectedEvent.details.outfits.men.map((item, i) => (
                             <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
                               <Sparkles className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
-                              <span className="text-base">{item}</span>
+                              <span className="text-base font-serif">{item}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                        <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-2">
                           {t('outfits.women') || 'For Women'}
                         </h4>
                         <ul className="space-y-2">
                           {selectedEvent.details.outfits.women.map((item, i) => (
                             <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
                               <Sparkles className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
-                              <span className="text-base">{item}</span>
+                              <span className="text-base font-serif">{item}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                      <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-3">
                         {t('outfits.colors') || 'Suggested Colors'}
                       </h4>
                       <div className="flex flex-wrap gap-3">
@@ -596,7 +600,7 @@ export default function Timeline() {
                               className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
                               style={{ backgroundColor: color.hex }}
                             ></div>
-                            <span className="text-sm text-gray-700 dark:text-gray-300">{color.name}</span>
+                            <span className="text-sm font-serif text-gray-700 dark:text-gray-300">{color.name}</span>
                           </div>
                         ))}
                       </div>
@@ -617,7 +621,7 @@ export default function Timeline() {
                     </h3>
                   </div>
                   <div className="ml-14">
-                    <p className="text-lg text-gray-700 dark:text-gray-300">
+                    <p className="text-lg font-serif text-gray-700 dark:text-gray-300">
                       {selectedEvent.details.dj}
                     </p>
                   </div>
@@ -640,7 +644,7 @@ export default function Timeline() {
                       {selectedEvent.details.drinks.map((drink, i) => (
                         <li key={i} className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
                           <Sparkles className="w-4 h-4 text-gold-500 flex-shrink-0" />
-                          <span className="text-base">{drink}</span>
+                          <span className="text-base font-serif">{drink}</span>
                         </li>
                       ))}
                     </ul>
@@ -664,7 +668,7 @@ export default function Timeline() {
                       {selectedEvent.details.food.map((item, i) => (
                         <li key={i} className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
                           <Sparkles className="w-4 h-4 text-gold-500 flex-shrink-0" />
-                          <span className="text-base">{item}</span>
+                          <span className="text-base font-serif">{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -688,7 +692,7 @@ export default function Timeline() {
                       {selectedEvent.details.expectations.map((item, i) => (
                         <li key={i} className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
                           <Sparkles className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
-                          <span className="text-base">{item}</span>
+                          <span className="text-base font-serif">{item}</span>
                         </li>
                       ))}
                     </ul>

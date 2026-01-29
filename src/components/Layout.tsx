@@ -101,7 +101,7 @@ export default function Layout({ children }: LayoutProps) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-serif font-medium transition-colors ${
                     isActive(item.path)
                       ? 'bg-gold-500 text-white dark:bg-gold-600'
                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -207,7 +207,7 @@ export default function Layout({ children }: LayoutProps) {
                       key={item.path}
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                      className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-serif font-medium transition-colors ${
                         isActive(item.path)
                           ? 'bg-gold-500 text-white dark:bg-gold-600'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'

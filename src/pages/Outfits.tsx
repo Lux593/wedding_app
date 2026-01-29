@@ -175,7 +175,7 @@ export default function Outfits() {
         <div className="inline-flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 border-2 border-cream-200 dark:border-cream-600">
             <button
             onClick={() => setActiveTab('men')}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all flex items-center space-x-2 ${
+            className={`px-6 py-3 rounded-lg font-serif font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'men'
                 ? 'bg-gold-500 text-white dark:bg-gold-600 shadow-lg'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -186,7 +186,7 @@ export default function Outfits() {
           </button>
           <button
             onClick={() => setActiveTab('women')}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all flex items-center space-x-2 ${
+            className={`px-6 py-3 rounded-lg font-serif font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'women'
                 ? 'bg-gold-500 text-white dark:bg-gold-600 shadow-lg'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -257,14 +257,14 @@ export default function Outfits() {
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-2">
                   {t(suggestion.eventKey)}
                 </h2>
-                <span className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-xs font-semibold rounded-full border border-cream-300 dark:border-cream-600 mb-2">
+                <span className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-xs font-serif font-semibold rounded-full border border-cream-300 dark:border-cream-600 mb-2">
                   {suggestion.tag}
                 </span>
-                <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                <div className="flex items-center space-x-2 text-sm font-serif text-gray-600 dark:text-gray-400 mb-2">
                   <MdEventNote className="w-4 h-4" />
                   <span>{suggestion.time}</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-lg">
+                <p className="text-gray-700 dark:text-gray-300 font-serif text-lg">
                   {t(suggestion.descKey)}
                 </p>
               </div>
@@ -288,7 +288,7 @@ export default function Outfits() {
                   {(activeTab === 'men' ? suggestion.recommendations.men : suggestion.recommendations.women).map((item, i) => (
                     <li key={i} className="flex items-start space-x-3">
                       <Sparkles className="w-4 h-4 text-gold-500 dark:text-gold-400 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">{item}</span>
+                      <span className="font-serif text-gray-700 dark:text-gray-300">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -297,7 +297,7 @@ export default function Outfits() {
 
             {/* Color Suggestions with Visual Colors */}
             <div className="border-t-2 border-gray-200 dark:border-gray-700 pt-6 relative z-10">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+              <h3 className="font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
                 <Sparkles className="w-5 h-5 text-gold-500 dark:text-gold-400" />
                 <span>{t('outfits.colors')}</span>
               </h3>
@@ -311,7 +311,7 @@ export default function Outfits() {
                       className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
                       style={{ backgroundColor: color.hex }}
                     ></div>
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-serif font-semibold text-gray-700 dark:text-gray-300">
                       {color.name}
                     </span>
                   </div>

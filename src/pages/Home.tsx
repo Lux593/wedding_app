@@ -82,7 +82,7 @@ export default function Home() {
               <Sparkles className="w-4 h-4 text-white" />
               <div className="h-px w-12 bg-white/90 dark:bg-white/80"></div>
             </div>
-            <p className="text-white leading-relaxed text-lg drop-shadow-xl">
+            <p className="text-white font-serif leading-relaxed text-lg drop-shadow-xl">
               {t('home.welcomeText')}
             </p>
           </div>
@@ -108,10 +108,10 @@ export default function Home() {
                     <Icon className="w-5 h-5 md:w-6 md:h-6 text-gold-600 dark:text-gold-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors truncate">
+                    <h3 className="text-base md:text-lg font-serif font-semibold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors truncate">
                       {t(link.key)}
                     </h3>
-                    <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
+                    <p className="text-xs md:text-sm font-serif text-gray-600 dark:text-gray-400 line-clamp-1">
                       {t(link.descKey)}
                     </p>
                   </div>

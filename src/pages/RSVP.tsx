@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react'
-import { Sparkles, Heart } from 'lucide-react'
+import { Sparkles, Heart, AlertTriangle } from 'lucide-react'
 import { 
   MdMarkEmailRead, 
   MdPeople, 
@@ -76,7 +76,7 @@ export default function RSVP() {
               <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
               <div className="h-px w-12 bg-gold-300 dark:bg-gold-700"></div>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
+            <p className="text-lg font-serif text-gray-700 dark:text-gray-300">
               {t('rsvp.success')}
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function RSVP() {
         <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
           {/* Attending */}
           <div>
-            <label className="block text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+            <label className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
               <Sparkles className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.attending')} *</span>
             </label>
@@ -128,7 +128,7 @@ export default function RSVP() {
                   }`}
                 >
                   <div className="text-2xl mb-2">✓</div>
-                  <div className="font-semibold">{t('rsvp.yes')}</div>
+                  <div className="font-serif font-semibold">{t('rsvp.yes')}</div>
                 </div>
               </label>
               <label className="cursor-pointer group">
@@ -151,7 +151,7 @@ export default function RSVP() {
                   }`}
                 >
                   <div className="text-2xl mb-2">✗</div>
-                  <div className="font-semibold">{t('rsvp.no')}</div>
+                  <div className="font-serif font-semibold">{t('rsvp.no')}</div>
                 </div>
               </label>
             </div>
@@ -159,7 +159,7 @@ export default function RSVP() {
 
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-base font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
+            <label htmlFor="name" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
               <MdPerson className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.name')} *</span>
             </label>
@@ -169,14 +169,14 @@ export default function RSVP() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder={t('rsvp.namePlaceholder')}
-              className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
+              className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
               required
             />
           </div>
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-base font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
+            <label htmlFor="email" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
               <MdMarkEmailRead className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.email')} *</span>
             </label>
@@ -186,7 +186,7 @@ export default function RSVP() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder={t('rsvp.emailPlaceholder')}
-              className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
+              className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
               required
             />
           </div>
@@ -194,7 +194,7 @@ export default function RSVP() {
           {/* Number of Guests */}
           {formData.attending === 'yes' && (
             <div>
-              <label htmlFor="guests" className="block text-base font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
+              <label htmlFor="guests" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
                 <MdPeople className="w-5 h-5 text-gold-500 dark:text-gold-400" />
                 <span>{t('rsvp.guests')} *</span>
               </label>
@@ -207,10 +207,10 @@ export default function RSVP() {
                 onChange={(e) =>
                   setFormData({ ...formData, numberOfGuests: parseInt(e.target.value) || 1 })
                 }
-                className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
+                className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
                 required
               />
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              <p className="mt-2 text-sm font-serif text-gray-500 dark:text-gray-400">
                 {t('rsvp.guestsDesc')}
               </p>
             </div>
@@ -219,8 +219,8 @@ export default function RSVP() {
           {/* Allergies */}
           {formData.attending === 'yes' && (
             <div>
-              <label className="block text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
-                <Sparkles className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+              <label className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+                <AlertTriangle className="w-5 h-5 text-gold-500 dark:text-gold-400" />
                 <span>{t('rsvp.allergies')}</span>
               </label>
               <div className="mb-4">
@@ -240,12 +240,12 @@ export default function RSVP() {
                       </svg>
                     )}
                   </div>
-                  <span className="text-gray-700 dark:text-gray-300">{t('rsvp.hasAllergies')}</span>
+                  <span className="font-serif text-gray-700 dark:text-gray-300">{t('rsvp.hasAllergies')}</span>
                 </label>
               </div>
               {formData.hasAllergies && (
                 <div>
-                  <label htmlFor="allergies" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="allergies" className="block text-sm font-serif font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {t('rsvp.allergiesDetails')} *
                   </label>
                   <textarea
@@ -254,7 +254,7 @@ export default function RSVP() {
                     onChange={(e) => setFormData({ ...formData, allergies: e.target.value })}
                     placeholder={t('rsvp.allergiesPlaceholder')}
                     rows={3}
-                    className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all resize-none"
+                    className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all resize-none"
                     required={formData.hasAllergies}
                   />
                 </div>
@@ -264,7 +264,7 @@ export default function RSVP() {
 
           {/* Message */}
           <div>
-            <label htmlFor="message" className="block text-base font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
+            <label htmlFor="message" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
               <MdMessage className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.message')}</span>
             </label>
@@ -274,7 +274,7 @@ export default function RSVP() {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder={t('rsvp.messagePlaceholder')}
               rows={5}
-              className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all resize-none"
+              className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all resize-none"
             />
           </div>
 
@@ -282,7 +282,7 @@ export default function RSVP() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 dark:from-gold-600 dark:to-gold-700 dark:hover:from-gold-700 dark:hover:to-gold-800 text-white font-bold py-4 px-8 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl hover:scale-105 disabled:hover:scale-100"
+            className="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 dark:from-gold-600 dark:to-gold-700 dark:hover:from-gold-700 dark:hover:to-gold-800 text-white font-serif font-bold py-4 px-8 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl hover:scale-105 disabled:hover:scale-100"
           >
             {isSubmitting ? (
               <>
