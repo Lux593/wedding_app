@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Sparkles, ArrowRight, Music, UtensilsCrossed, Wine, ChevronDown, ChevronUp } from 'lucide-react'
 import { 
   MdEventNote, 
@@ -465,8 +466,8 @@ export default function Timeline() {
         </div>
       )}
 
-      {/* Event Details Modal */}
-      {selectedEvent && (
+      {/* Event Details Modal - Portal, damit fixed nicht vom Layout-Transform abgeschnitten wird */}
+      {selectedEvent && createPortal(
         <div className="fixed inset-0 top-16 md:top-20 z-50 bg-white dark:bg-gray-900 overflow-y-auto rounded-t-3xl">
           {/* Close Button */}
           <button
@@ -695,7 +696,8 @@ export default function Timeline() {
                 </div>
               )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
