@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react'
+import { createPortal } from 'react-dom'
 import {
   ConfettiIcon,
   HeartIcon,
@@ -63,9 +64,16 @@ export default function RSVP() {
   }
 
   if (isSubmitted) {
-    return (
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-cream-200/70 dark:bg-cream-800/40 border-2 border-cream-400/80 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden backdrop-blur-sm">
+    const modal = (
+      <div
+        className="fixed inset-0 z-[110] flex items-center justify-center bg-black/40 backdrop-blur-sm"
+        style={{
+          padding: 'max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left))',
+          minHeight: '100dvh',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div className="max-w-2xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto bg-cream-200/95 dark:bg-cream-800/95 border-2 border-cream-400/80 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative backdrop-blur-sm">
           <div className="relative z-10">
             <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rsvp-heart-pulse" aria-hidden>
               <svg
@@ -112,6 +120,7 @@ export default function RSVP() {
         </div>
       </div>
     )
+    return createPortal(modal, document.body)
   }
 
   return (

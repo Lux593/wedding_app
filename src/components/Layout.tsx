@@ -101,7 +101,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
-      <header className="sticky top-0 z-[60] bg-gray-50/98 dark:bg-gray-950/98 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+      <header className="sticky top-0 z-[100] bg-gray-50/98 dark:bg-gray-950/98 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -213,12 +213,12 @@ export default function Layout({ children }: LayoutProps) {
       {isMenuOpen && (
         <>
           <div
-            className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-40 bg-black/20 dark:bg-black/30 cursor-pointer"
+            className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-[90] bg-black/20 dark:bg-black/30 cursor-pointer"
             onClick={() => setIsMenuOpen(false)}
             aria-hidden
           />
           <div
-            className="md:hidden fixed right-0 top-16 z-50 w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar flex flex-col max-h-[calc(100vh-4rem)]"
+            className="md:hidden fixed right-0 top-16 z-[95] w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar flex flex-col max-h-[calc(100vh-4rem)]"
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="px-4 py-6 space-y-2 flex-1 overflow-y-auto">

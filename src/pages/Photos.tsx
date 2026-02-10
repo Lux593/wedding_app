@@ -108,7 +108,7 @@ export default function Photos() {
       {/* Lightbox Modal – Portal, damit nicht vom Layout abgeschnitten; scrollbar bei hohen Fotos */}
       {selectedImage !== null && createPortal(
         <div
-          className="fixed inset-0 top-0 z-[70] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm"
+          className="fixed inset-0 top-0 z-[110] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm"
         >
           {/* Schließen-Button oben rechts, gleiches Design wie Vor/Zurück, fixiert */}
           <button
