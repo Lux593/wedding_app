@@ -81,8 +81,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Outfits
     'outfits.title': 'Outfit-Empfehlungen',
     'outfits.subheader': 'Was anziehen? Hier findest du Stil-Tipps für jedes Event.',
-    'outfits.men': 'Für Herren',
-    'outfits.women': 'Für Damen',
+    'outfits.men': 'Herren',
+    'outfits.women': 'Damen',
     'outfits.colors': 'Empfohlene Farben',
     'outfits.formal': 'Formelle Kleidung für die Zeremonie',
     'outfits.smartCasual': 'Smart Casual für den Empfang',
@@ -235,8 +235,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Outfits
     'outfits.title': 'Outfit Recommendations',
     'outfits.subheader': 'What to wear? Style tips for every event.',
-    'outfits.men': 'For Gentlemen',
-    'outfits.women': 'For Ladies',
+    'outfits.men': 'Gents',
+    'outfits.women': 'Ladies',
     'outfits.colors': 'Recommended Colors',
     'outfits.formal': 'Formal attire for the ceremony',
     'outfits.smartCasual': 'Smart casual for the reception',
@@ -389,8 +389,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Outfits
     'outfits.title': 'Recommandations de tenue',
     'outfits.subheader': 'Quoi porter? Conseils de style pour chaque moment.',
-    'outfits.men': 'Pour les hommes',
-    'outfits.women': 'Pour les femmes',
+    'outfits.men': 'Hommes',
+    'outfits.women': 'Femmes',
     'outfits.colors': 'Couleurs recommandées',
     'outfits.formal': 'Tenue formelle pour la cérémonie',
     'outfits.smartCasual': 'Smart casual pour la réception',

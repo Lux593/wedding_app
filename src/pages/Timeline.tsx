@@ -402,7 +402,7 @@ export default function Timeline() {
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -534,8 +534,8 @@ export default function Timeline() {
             {selectedEvent.details.location && (
               <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl">
-                      <MapPinIcon className="w-6 h-6 text-white" />
+                    <div className="p-3 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
+                      <MapPinIcon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                     </div>
                     <h3 className="text-2xl font-serif font-semibold text-gray-900 dark:text-white">
                       {t('timeline.details.location') || 'Location'}
@@ -574,8 +574,8 @@ export default function Timeline() {
             {selectedEvent.details.outfits && (
               <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl">
-                      <CoatHangerIcon className="w-6 h-6 text-white" />
+                    <div className="p-3 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
+                      <CoatHangerIcon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                     </div>
                     <h3 className="text-2xl font-serif font-semibold text-gray-900 dark:text-white">
                       {t('timeline.details.outfits') || 'Outfit Recommendations'}
@@ -593,7 +593,7 @@ export default function Timeline() {
                         <ul className="space-y-2">
                           {selectedEvent.details.outfits.men.map((itemKey, i) => (
                             <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
-                              <SparkleIcon className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
+                              <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
                               <span className="text-base font-serif">{t(itemKey)}</span>
                             </li>
                           ))}
@@ -606,7 +606,7 @@ export default function Timeline() {
                         <ul className="space-y-2">
                           {selectedEvent.details.outfits.women.map((itemKey, i) => (
                             <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
-                              <SparkleIcon className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
+                              <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
                               <span className="text-base font-serif">{t(itemKey)}</span>
                             </li>
                           ))}
@@ -640,8 +640,8 @@ export default function Timeline() {
             {selectedEvent.details.dj && (
               <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
-                      <MusicNotesIcon className="w-6 h-6 text-white" />
+                    <div className="p-3 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
+                      <MusicNotesIcon className="w-6 h-6 text-gold-600/90 dark:text-gold-400/90" />
                     </div>
                     <h3 className="text-2xl font-serif font-semibold text-gray-900 dark:text-white">
                       {t('timeline.details.dj') || 'DJ'}
@@ -659,8 +659,8 @@ export default function Timeline() {
             {selectedEvent.details.drinks && (
               <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
-                      <WineIcon className="w-6 h-6 text-white" />
+                    <div className="p-3 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
+                      <WineIcon className="w-6 h-6 text-gold-600/90 dark:text-gold-400/90" />
                     </div>
                     <h3 className="text-2xl font-serif font-semibold text-gray-900 dark:text-white">
                       {t('timeline.details.drinks') || 'Drinks'}
@@ -670,7 +670,7 @@ export default function Timeline() {
                     <ul className="grid md:grid-cols-2 gap-2">
                       {selectedEvent.details.drinks.map((drink, i) => (
                         <li key={i} className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
-                          <SparkleIcon className="w-4 h-4 text-gold-500 flex-shrink-0" />
+                          <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 flex-shrink-0" />
                           <span className="text-base font-serif">{drink}</span>
                         </li>
                       ))}
@@ -683,8 +683,8 @@ export default function Timeline() {
             {selectedEvent.details.food && (
               <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl">
-                      <ForkKnifeIcon className="w-6 h-6 text-white" />
+                    <div className="p-3 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
+                      <ForkKnifeIcon className="w-6 h-6 text-gold-600/90 dark:text-gold-400/90" />
                     </div>
                     <h3 className="text-2xl font-serif font-semibold text-gray-900 dark:text-white">
                       {t('timeline.details.food') || 'Food'}
@@ -694,7 +694,7 @@ export default function Timeline() {
                     <ul className="grid md:grid-cols-2 gap-2">
                       {selectedEvent.details.food.map((item, i) => (
                         <li key={i} className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
-                          <SparkleIcon className="w-4 h-4 text-gold-500 flex-shrink-0" />
+                          <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 flex-shrink-0" />
                           <span className="text-base font-serif">{item}</span>
                         </li>
                       ))}
@@ -707,8 +707,8 @@ export default function Timeline() {
             {selectedEvent.details.expectations && (
               <div>
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl">
-                      <SparkleIcon className="w-6 h-6 text-white" />
+                    <div className="p-3 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
+                      <SparkleIcon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                     </div>
                     <h3 className="text-2xl font-serif font-semibold text-gray-900 dark:text-white">
                       {t('timeline.details.expectations') || 'What to Expect'}
@@ -718,7 +718,7 @@ export default function Timeline() {
                     <ul className="space-y-3">
                       {selectedEvent.details.expectations.map((item, i) => (
                         <li key={i} className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                          <SparkleIcon className="w-4 h-4 text-gold-500 mt-1 flex-shrink-0" />
+                          <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
                           <span className="text-base font-serif">{item}</span>
                         </li>
                       ))}

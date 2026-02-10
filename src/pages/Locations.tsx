@@ -4,7 +4,6 @@ import {
   CaretUpIcon,
   MapPinIcon,
   ArrowSquareOutIcon,
-  NavigationArrowIcon,
 } from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -112,7 +111,7 @@ export default function Locations() {
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -157,8 +156,8 @@ export default function Locations() {
             
             <div className="p-6 md:p-8 relative z-10">
               <div className="flex items-start space-x-4 mb-6">
-                <div className="p-4 bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl shadow-xl border-2 border-white/20">
-                  <MapPinIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <div className="p-4 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/40 dark:to-cream-600/40 rounded-xl shadow-md border border-cream-300/50 dark:border-cream-600/50">
+                  <MapPinIcon className="w-6 h-6 md:w-8 md:h-8 text-gold-600 dark:text-gold-400" />
                 </div>
                 <div className="flex-1">
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-white drop-shadow-lg mb-2">
@@ -198,11 +197,10 @@ export default function Locations() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 px-4 py-2 bg-gold-500 hover:bg-gold-600 dark:bg-gold-600 dark:hover:bg-gold-700 text-white font-serif font-medium text-sm rounded-lg transition-all hover:shadow-lg hover:scale-105"
+                  className="inline-flex items-center space-x-2 px-5 py-2.5 bg-cream-100/90 dark:bg-cream-700/30 border-2 border-gold-400/80 dark:border-gold-500/70 text-gold-700 dark:text-gold-300 font-serif font-medium text-sm rounded-xl transition-all hover:bg-cream-200 dark:hover:bg-cream-600/50 hover:border-gold-500 dark:hover:border-gold-500 hover:shadow-md"
                 >
-                  <NavigationArrowIcon className="w-4 h-4" />
                   <span>{t('locations.directions')}</span>
-                  <ArrowSquareOutIcon className="w-4 h-4" />
+                  <ArrowSquareOutIcon className="w-4 h-4 text-gold-600 dark:text-gold-400" />
                 </a>
               </div>
             </div>

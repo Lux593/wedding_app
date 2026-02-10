@@ -234,7 +234,7 @@ export default function Outfits() {
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -259,7 +259,7 @@ export default function Outfits() {
                   {daySuggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="group bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative overflow-hidden"
+                    className="group bg-cream-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative overflow-hidden"
                   >
             {/* Header */}
             <div className="flex items-start space-x-4 mb-6 relative z-10">
@@ -270,9 +270,6 @@ export default function Outfits() {
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-2">
                   {t(suggestion.eventKey)}
                 </h2>
-                <span className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-xs font-serif font-semibold rounded-full border border-cream-300 dark:border-cream-600 mb-2">
-                  {t(suggestion.tagKey)}
-                </span>
                 <div className="flex items-center space-x-2 text-sm font-serif text-gray-600 dark:text-gray-400 mb-2">
                   <CalendarBlankIcon className="w-4 h-4" />
                   <span>{suggestion.time}</span>
