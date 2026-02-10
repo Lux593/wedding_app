@@ -1,13 +1,15 @@
 import { useState, FormEvent } from 'react'
-import { UserCheck, Heart, AlertTriangle } from 'lucide-react'
-import { 
-  MdMarkEmailRead, 
-  MdPeople, 
-  MdMessage, 
-  MdCheckCircle, 
-  MdSend,
-  MdPerson
-} from 'react-icons/md'
+import {
+  ConfettiIcon,
+  HeartIcon,
+  HeartBreakIcon,
+  WarningIcon,
+  EnvelopeIcon,
+  UsersIcon,
+  ChatCircleIcon,
+  PaperPlaneRightIcon,
+  UserIcon,
+} from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
 
 interface RSVPFormData {
@@ -63,17 +65,44 @@ export default function RSVP() {
   if (isSubmitted) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-200 dark:border-green-800 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden">
+        <div className="bg-cream-200/70 dark:bg-cream-800/40 border-2 border-cream-400/80 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden backdrop-blur-sm">
           <div className="relative z-10">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500 dark:bg-green-600 rounded-full mb-6 shadow-lg">
-              <MdCheckCircle className="w-12 h-12 text-white" />
+            <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rsvp-heart-pulse" aria-hidden>
+              <svg
+                viewBox="0 0 24 24"
+                className="w-full h-full text-red-500 dark:text-red-400"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path
+                  pathLength="1"
+                  className="rsvp-heart-outline"
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+                <path
+                  className="rsvp-heart-fill"
+                  fill="currentColor"
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+                <path
+                  fill="none"
+                  strokeWidth="0.42"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="rsvp-heart-gold-frame stroke-gold-500 dark:stroke-gold-400"
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
             </div>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
               {t('rsvp.thankYou')}
             </h2>
             <div className="flex items-center justify-center space-x-2 mb-6">
               <div className="h-px w-12 bg-gold-300 dark:bg-gold-700"></div>
-              <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+              <HeartIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
               <div className="h-px w-12 bg-gold-300 dark:bg-gold-700"></div>
             </div>
             <p className="text-lg font-serif text-gray-700 dark:text-gray-300">
@@ -88,13 +117,13 @@ export default function RSVP() {
   return (
     <div className="max-w-3xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-12 md:mb-16 relative">
+      <div className="text-center mb-6 md:mb-8 relative">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
           {t('rsvp.title')}
         </h1>
         <div className="flex items-center justify-center space-x-2">
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-700"></div>
-          <MdMarkEmailRead className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+          <EnvelopeIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-700"></div>
         </div>
         <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
@@ -107,7 +136,7 @@ export default function RSVP() {
           {/* Attending */}
           <div>
             <label className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
-              <UserCheck className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+              <ConfettiIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" weight="duotone" />
               <span>{t('rsvp.attending')} *</span>
             </label>
             <div className="grid grid-cols-2 gap-4">
@@ -126,11 +155,11 @@ export default function RSVP() {
                 <div
                   className={`h-32 p-6 rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center ${
                     formData.attending === 'yes'
-                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40'
+                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40 rsvp-option-selected'
                       : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-600'
                   }`}
                 >
-                  <div className="text-2xl mb-2">✓</div>
+                  <HeartIcon className="w-8 h-8 mb-2 text-current" weight="fill" />
                   <div className="font-serif font-semibold">{t('rsvp.yes')}</div>
                 </div>
               </label>
@@ -149,11 +178,11 @@ export default function RSVP() {
                 <div
                   className={`h-32 p-6 rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center ${
                     formData.attending === 'no'
-                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40'
+                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40 rsvp-option-selected'
                       : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-600'
                   }`}
                 >
-                  <div className="text-2xl mb-2">✗</div>
+                  <HeartBreakIcon className="w-8 h-8 mb-2 text-current" weight="duotone" />
                   <div className="font-serif font-semibold">{t('rsvp.no')}</div>
                 </div>
               </label>
@@ -163,7 +192,7 @@ export default function RSVP() {
           {/* Name */}
           <div>
             <label htmlFor="name" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
-              <MdPerson className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+              <UserIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.name')} *</span>
             </label>
             <input
@@ -180,7 +209,7 @@ export default function RSVP() {
           {/* Email */}
           <div>
             <label htmlFor="email" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
-              <MdMarkEmailRead className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+              <EnvelopeIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.email')} *</span>
             </label>
             <input
@@ -198,7 +227,7 @@ export default function RSVP() {
           {formData.attending === 'yes' && (
             <div>
               <label htmlFor="guests" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
-                <MdPeople className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+                <UsersIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
                 <span>{t('rsvp.guests')} *</span>
               </label>
               <input
@@ -223,7 +252,7 @@ export default function RSVP() {
           {formData.attending === 'yes' && (
             <div>
               <label className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
-                <AlertTriangle className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+                <WarningIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
                 <span>{t('rsvp.allergies')}</span>
               </label>
               <div className="mb-4">
@@ -268,7 +297,7 @@ export default function RSVP() {
           {/* Message */}
           <div>
             <label htmlFor="message" className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
-              <MdMessage className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+              <ChatCircleIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
               <span>{t('rsvp.message')}</span>
             </label>
             <textarea
@@ -294,7 +323,7 @@ export default function RSVP() {
               </>
             ) : (
               <>
-                <MdSend className="w-5 h-5" />
+                <PaperPlaneRightIcon className="w-5 h-5" />
                 <span>{t('rsvp.submit')}</span>
               </>
             )}

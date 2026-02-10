@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import { 
-  MdLocationOn, 
-  MdOpenInNew, 
-  MdNavigation
-} from 'react-icons/md'
+import {
+  CaretDownIcon,
+  CaretUpIcon,
+  MapPinIcon,
+  ArrowSquareOutIcon,
+  NavigationArrowIcon,
+} from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
 
 interface Location {
@@ -65,13 +66,13 @@ export default function Locations() {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Header – gleiche Breite wie RSVP, damit Subheader einheitlich wirkt */}
-      <div className="text-center mb-12 md:mb-16 relative max-w-3xl mx-auto">
+      <div className="text-center mb-6 md:mb-8 relative max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
           {t('locations.title')}
         </h1>
         <div className="flex items-center justify-center space-x-2">
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
-          <MdLocationOn className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+          <MapPinIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
         </div>
         <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
@@ -80,7 +81,7 @@ export default function Locations() {
       </div>
 
       {/* Locations grouped by date – Zeitstrahl verbindet die Kacheln inkl. oberer/unterer Verbindungspunkte */}
-      <div className="relative pt-[36px] pb-[36px]">
+      <div className="relative pt-[18px] pb-[36px]">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-300 dark:from-gold-600 dark:via-gold-500 dark:to-gold-600 z-0" aria-hidden />
         <div className="space-y-6 md:space-y-8 relative z-10">
         {dateOrder.map((date, index) => {
@@ -104,7 +105,7 @@ export default function Locations() {
             <div key={date} className="relative space-y-4">
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[36px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[18px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
@@ -118,14 +119,14 @@ export default function Locations() {
                     {t(`timeline.date.${date}`)}
                   </h2>
                   {isOpen ? (
-                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    <CaretUpIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    <CaretDownIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
                   )}
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <MdLocationOn className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <MapPinIcon className="w-3 h-3 text-gold-500 dark:text-gold-400" />
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
                 </div>
               </button>
@@ -157,7 +158,7 @@ export default function Locations() {
             <div className="p-6 md:p-8 relative z-10">
               <div className="flex items-start space-x-4 mb-6">
                 <div className="p-4 bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl shadow-xl border-2 border-white/20">
-                  <MdLocationOn className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                  <MapPinIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
                 <div className="flex-1">
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-white drop-shadow-lg mb-2">
@@ -199,9 +200,9 @@ export default function Locations() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 px-4 py-2 bg-gold-500 hover:bg-gold-600 dark:bg-gold-600 dark:hover:bg-gold-700 text-white font-serif font-medium text-sm rounded-lg transition-all hover:shadow-lg hover:scale-105"
                 >
-                  <MdNavigation className="w-4 h-4" />
+                  <NavigationArrowIcon className="w-4 h-4" />
                   <span>{t('locations.directions')}</span>
-                  <MdOpenInNew className="w-4 h-4" />
+                  <ArrowSquareOutIcon className="w-4 h-4" />
                 </a>
               </div>
             </div>

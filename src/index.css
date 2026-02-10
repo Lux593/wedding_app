@@ -91,3 +91,65 @@ html {
     transform: translateX(0);
   }
 }
+
+/* RSVP Success: Herz zeichnet sich stückweise auf */
+@keyframes heartDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes heartFill {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rsvp-heart-outline {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: heartDraw 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.rsvp-heart-fill {
+  opacity: 0;
+  animation: heartFill 0.4s ease-out 0.5s forwards;
+}
+
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.rsvp-heart-pulse {
+  animation: heartPulse 1.2s ease-in-out 1.2s infinite;
+}
+
+.rsvp-heart-gold-frame {
+  opacity: 0;
+  animation: heartFill 0.3s ease-out 1.1s forwards;
+}
+
+/* RSVP Attending-Buttons: Bestätigungs-Animation beim Anklicken */
+@keyframes rsvpOptionSelect {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.rsvp-option-selected {
+  animation: rsvpOptionSelect 0.35s ease-out;
+}

@@ -1,12 +1,13 @@
-import { Sparkles, Palette, ChevronDown, ChevronUp } from 'lucide-react'
-import { 
-  MdCheckroom, 
-  MdEventNote
-} from 'react-icons/md'
-import { 
-  FaMale,
-  FaFemale
-} from 'react-icons/fa'
+import {
+  SparkleIcon,
+  PaletteIcon,
+  CaretDownIcon,
+  CaretUpIcon,
+  CoatHangerIcon,
+  CalendarBlankIcon,
+  GenderMaleIcon,
+  GenderFemaleIcon,
+} from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useState } from 'react'
 
@@ -159,13 +160,13 @@ export default function Outfits() {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Header – gleiche Breite wie RSVP, damit Subheader einheitlich wirkt */}
-      <div className="text-center mb-12 md:mb-16 relative max-w-3xl mx-auto">
+      <div className="text-center mb-6 md:mb-8 relative max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
           {t('outfits.title')}
         </h1>
         <div className="flex items-center justify-center space-x-2">
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
-          <MdCheckroom className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+          <CoatHangerIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
         </div>
         <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
@@ -184,7 +185,7 @@ export default function Outfits() {
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
-            <FaMale className="w-5 h-5" />
+            <GenderMaleIcon className="w-5 h-5" />
             <span>{t('outfits.men')}</span>
           </button>
           <button
@@ -195,7 +196,7 @@ export default function Outfits() {
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
-            <FaFemale className="w-5 h-5" />
+            <GenderFemaleIcon className="w-5 h-5" />
             <span>{t('outfits.women')}</span>
           </button>
         </div>
@@ -240,14 +241,14 @@ export default function Outfits() {
                     {t(`timeline.date.${date}`)}
                   </h2>
                   {isOpen ? (
-                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    <CaretUpIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                    <CaretDownIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
                   )}
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <MdCheckroom className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <CoatHangerIcon className="w-3 h-3 text-gold-500 dark:text-gold-400" />
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
                 </div>
               </button>
@@ -263,7 +264,7 @@ export default function Outfits() {
             {/* Header */}
             <div className="flex items-start space-x-4 mb-6 relative z-10">
               <div className="p-4 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/30 dark:to-cream-600/30 rounded-xl shadow-md">
-                <MdCheckroom className="w-6 h-6 md:w-8 md:h-8 text-gold-600 dark:text-gold-400" />
+                <CoatHangerIcon className="w-6 h-6 md:w-8 md:h-8 text-gold-600 dark:text-gold-400" />
               </div>
               <div className="flex-1">
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-2">
@@ -273,7 +274,7 @@ export default function Outfits() {
                   {t(suggestion.tagKey)}
                 </span>
                 <div className="flex items-center space-x-2 text-sm font-serif text-gray-600 dark:text-gray-400 mb-2">
-                  <MdEventNote className="w-4 h-4" />
+                  <CalendarBlankIcon className="w-4 h-4" />
                   <span>{suggestion.time}</span>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 font-serif text-lg">
@@ -299,7 +300,7 @@ export default function Outfits() {
                 <ul className="space-y-3">
                   {(activeTab === 'men' ? suggestion.recommendations.men : suggestion.recommendations.women).map((itemKey, i) => (
                     <li key={i} className="flex items-start space-x-3">
-                      <Sparkles className="w-4 h-4 text-gold-500 dark:text-gold-400 mt-1 flex-shrink-0" />
+                      <SparkleIcon className="w-4 h-4 text-gold-500 dark:text-gold-400 mt-1 flex-shrink-0" />
                       <span className="font-serif text-gray-700 dark:text-gray-300">{t(itemKey)}</span>
                     </li>
                   ))}
@@ -310,7 +311,7 @@ export default function Outfits() {
             {/* Color Suggestions with Visual Colors */}
             <div className="border-t-2 border-gray-200 dark:border-gray-700 pt-6 relative z-10">
               <h3 className="font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
-                <Palette className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+                <PaletteIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
                 <span>{t('outfits.colors')}</span>
               </h3>
               <div className="flex flex-wrap gap-3">

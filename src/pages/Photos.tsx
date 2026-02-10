@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { 
-  MdPhotoCamera, 
-  MdClose
-} from 'react-icons/md'
+import { CaretLeftIcon, CaretRightIcon, CameraIcon, XIcon } from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
 
 // Wedding photos - später durch Supabase ersetzt
@@ -72,7 +68,7 @@ export default function Photos() {
         </h1>
         <div className="flex items-center justify-center space-x-2 mb-6">
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-700"></div>
-          <MdPhotoCamera className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+          <CameraIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-700"></div>
         </div>
         <p className="mt-2 mb-6 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
@@ -85,7 +81,7 @@ export default function Photos() {
             onClick={handleUploadClick}
             className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 dark:from-gold-600 dark:to-gold-700 dark:hover:from-gold-700 dark:hover:to-gold-800 text-white font-serif font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
           >
-            <MdPhotoCamera className="w-5 h-5" />
+            <CameraIcon className="w-5 h-5" />
             <span>{t('photos.upload') || 'Fotos hochladen'}</span>
           </button>
         </div>
@@ -120,7 +116,7 @@ export default function Photos() {
             className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors backdrop-blur-sm border border-white/20 z-10"
             aria-label="Schließen"
           >
-            <MdClose className="w-6 h-6" />
+            <XIcon className="w-6 h-6" />
           </button>
           <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0 px-4" onClick={(e) => e.stopPropagation()}>
             <img
@@ -137,7 +133,7 @@ export default function Photos() {
               className="p-3 bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-full transition-colors backdrop-blur-sm border border-white/20"
               aria-label="Vorheriges Foto"
             >
-              <ChevronLeft className="w-8 h-8" />
+              <CaretLeftIcon className="w-8 h-8" />
             </button>
             <button
               onClick={goToNext}
@@ -145,7 +141,7 @@ export default function Photos() {
               className="p-3 bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-full transition-colors backdrop-blur-sm border border-white/20"
               aria-label="Nächstes Foto"
             >
-              <ChevronRight className="w-8 h-8" />
+              <CaretRightIcon className="w-8 h-8" />
             </button>
           </div>
         </div>,
@@ -155,11 +151,11 @@ export default function Photos() {
       {/* Info Message */}
       <div className="mt-16 text-center">
         <div className="inline-flex items-center space-x-3 px-6 py-4 bg-gold-50 dark:bg-gold-900/20 rounded-2xl border border-gold-200 dark:border-gold-800">
-          <MdPhotoCamera className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+          <CameraIcon className="w-5 h-5 text-gold-600 dark:text-gold-400" />
           <p className="text-gray-700 dark:text-gray-300 font-serif font-medium">
             {t('photos.moreComing')}
           </p>
-          <MdPhotoCamera className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+          <CameraIcon className="w-5 h-5 text-gold-600 dark:text-gold-400" />
         </div>
       </div>
     </div>

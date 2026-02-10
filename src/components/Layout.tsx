@@ -1,19 +1,20 @@
 import { useState, useEffect, ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sparkles, Heart } from 'lucide-react'
-import { 
-  MdMenu, 
-  MdClose, 
-  MdLightMode, 
-  MdDarkMode, 
-  MdLanguage,
-  MdHome,
-  MdEventNote,
-  MdLocationOn,
-  MdCheckroom,
-  MdMarkEmailRead,
-  MdPhotoCamera
-} from 'react-icons/md'
+import {
+  ListIcon,
+  XIcon,
+  SunIcon,
+  MoonIcon,
+  GlobeIcon,
+  SparkleIcon,
+  HeartIcon,
+  HouseIcon,
+  CalendarBlankIcon,
+  MapPinIcon,
+  CoatHangerIcon,
+  EnvelopeIcon,
+  CameraIcon,
+} from '@phosphor-icons/react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLanguage, Language } from '../contexts/LanguageContext'
 
@@ -63,12 +64,12 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
 
   const navigation = [
-    { name: t('nav.home'), path: '/', key: 'nav.home', icon: MdHome },
-    { name: t('nav.timeline'), path: '/timeline', key: 'nav.timeline', icon: MdEventNote },
-    { name: t('nav.locations'), path: '/locations', key: 'nav.locations', icon: MdLocationOn },
-    { name: t('nav.outfits'), path: '/outfits', key: 'nav.outfits', icon: MdCheckroom },
-    { name: t('nav.rsvp'), path: '/rsvp', key: 'nav.rsvp', icon: MdMarkEmailRead },
-    { name: t('nav.photos'), path: '/photos', key: 'nav.photos', icon: MdPhotoCamera },
+    { name: t('nav.home'), path: '/', key: 'nav.home', icon: HouseIcon },
+    { name: t('nav.timeline'), path: '/timeline', key: 'nav.timeline', icon: CalendarBlankIcon },
+    { name: t('nav.locations'), path: '/locations', key: 'nav.locations', icon: MapPinIcon },
+    { name: t('nav.outfits'), path: '/outfits', key: 'nav.outfits', icon: CoatHangerIcon },
+    { name: t('nav.rsvp'), path: '/rsvp', key: 'nav.rsvp', icon: EnvelopeIcon },
+    { name: t('nav.photos'), path: '/photos', key: 'nav.photos', icon: CameraIcon },
   ]
 
   const languages: { code: Language; name: string; flagComponent: ReactNode }[] = [
@@ -106,7 +107,7 @@ export default function Layout({ children }: LayoutProps) {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 group">
               <div className="relative">
-                <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-gold-500 dark:text-gold-400 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <SparkleIcon className="w-5 h-5 md:w-6 md:h-6 text-gold-500 dark:text-gold-400 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="text-2xl md:text-3xl font-serif font-bold text-gray-900 dark:text-white relative z-10">
                   R&S
                 </span>
@@ -140,9 +141,9 @@ export default function Layout({ children }: LayoutProps) {
                     className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center space-x-1"
                     aria-label="Change language"
                   >
-                    <MdLanguage className="w-5 h-5" />
+                    <GlobeIcon className="w-5 h-5" />
                     <span className="hidden sm:inline">
-                      {languages.find(l => l.code === language)?.flagComponent || <MdLanguage className="w-4 h-4" />}
+                      {languages.find(l => l.code === language)?.flagComponent || <GlobeIcon className="w-4 h-4" />}
                     </span>
                   </button>
                   {isLangMenuOpen && (
@@ -176,9 +177,9 @@ export default function Layout({ children }: LayoutProps) {
                   aria-label="Toggle theme"
                 >
                   {theme === 'dark' ? (
-                    <MdLightMode className="w-5 h-5" />
+                    <SunIcon className="w-5 h-5" />
                   ) : (
-                    <MdDarkMode className="w-5 h-5" />
+                    <MoonIcon className="w-5 h-5" />
                   )}
                 </button>
               </div>
@@ -190,9 +191,9 @@ export default function Layout({ children }: LayoutProps) {
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? (
-                  <MdClose className="w-6 h-6" />
+                  <XIcon className="w-6 h-6" />
                 ) : (
-                  <MdMenu className="w-6 h-6" />
+                  <ListIcon className="w-6 h-6" />
                 )}
               </button>
             </div>
@@ -248,7 +249,7 @@ export default function Layout({ children }: LayoutProps) {
                   className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                   aria-label="Change language"
                 >
-                  <MdLanguage className="w-5 h-5" />
+                  <GlobeIcon className="w-5 h-5" />
                 </button>
                 {isLangMenuOpen && (
                   <div className="absolute left-0 bottom-full mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
@@ -281,9 +282,9 @@ export default function Layout({ children }: LayoutProps) {
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? (
-                  <MdLightMode className="w-5 h-5" />
+                  <SunIcon className="w-5 h-5" />
                 ) : (
-                  <MdDarkMode className="w-5 h-5" />
+                  <MoonIcon className="w-5 h-5" />
                 )}
               </button>
             </div>
@@ -292,12 +293,12 @@ export default function Layout({ children }: LayoutProps) {
       )}
 
       {/* Footer */}
-      <footer className={`mt-16 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <footer className={`mt-8 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-sm font-serif text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
-            <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+            <HeartIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
             <span>{t('footer.text')}</span>
-            <Heart className="w-4 h-4 text-gold-500 dark:text-gold-400" />
+            <HeartIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           </p>
         </div>
       </footer>
