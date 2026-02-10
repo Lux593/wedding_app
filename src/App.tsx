@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { LanguageProvider } from './contexts/LanguageContext'
+import { EventDetailsProvider } from './contexts/EventDetailsContext'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Timeline from './pages/Timeline'
@@ -22,6 +23,7 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        <EventDetailsProvider>
         <Router>
           <ScrollToTop />
           <Layout>
@@ -35,6 +37,7 @@ function App() {
             </Routes>
           </Layout>
         </Router>
+        </EventDetailsProvider>
       </LanguageProvider>
     </ThemeProvider>
   )

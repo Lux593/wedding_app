@@ -1,5 +1,4 @@
 import {
-  SparkleIcon,
   PaletteIcon,
   CaretDownIcon,
   CaretUpIcon,
@@ -9,6 +8,7 @@ import {
   GenderFemaleIcon,
 } from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { getOutfitRecIcon } from '../lib/outfitRecIcons'
 import { useState } from 'react'
 
 interface OutfitSuggestion {
@@ -259,7 +259,7 @@ export default function Outfits() {
                   {daySuggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="group bg-cream-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative overflow-hidden"
+                    className="group bg-cream-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative z-10 overflow-hidden"
                   >
             {/* Header */}
             <div className="flex items-start space-x-4 mb-6 relative z-10">
@@ -295,12 +295,15 @@ export default function Outfits() {
               {/* Recommendations */}
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                 <ul className="space-y-3">
-                  {(activeTab === 'men' ? suggestion.recommendations.men : suggestion.recommendations.women).map((itemKey, i) => (
-                    <li key={i} className="flex items-start space-x-3">
-                      <SparkleIcon className="w-4 h-4 text-gold-500 dark:text-gold-400 mt-1 flex-shrink-0" />
-                      <span className="font-serif text-gray-700 dark:text-gray-300">{t(itemKey)}</span>
-                    </li>
-                  ))}
+                  {(activeTab === 'men' ? suggestion.recommendations.men : suggestion.recommendations.women).map((itemKey, i) => {
+                    const RecIcon = getOutfitRecIcon(itemKey)
+                    return (
+                      <li key={i} className="flex items-start space-x-3">
+                        <RecIcon className="w-4 h-4 text-gold-500 dark:text-gold-400 mt-1 flex-shrink-0" />
+                        <span className="font-serif text-gray-700 dark:text-gray-300">{t(itemKey)}</span>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             </div>

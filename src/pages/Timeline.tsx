@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import {
   SparkleIcon,
@@ -18,6 +18,8 @@ import {
   CoatHangerIcon,
 } from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useEventDetails } from '../contexts/EventDetailsContext'
+import { getOutfitRecIcon } from '../lib/outfitRecIcons'
 
 interface EventDetails {
   location?: {
@@ -54,8 +56,14 @@ interface TimelineEvent {
 
 export default function Timeline() {
   const { t } = useLanguage()
+  const { setIsOpen: setEventDetailsOpen } = useEventDetails()
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null)
   const [openDates, setOpenDates] = useState<Set<'nov27' | 'nov28' | 'nov29'>>(new Set())
+
+  useEffect(() => {
+    setEventDetailsOpen(selectedEvent !== null)
+    return () => setEventDetailsOpen(false)
+  }, [selectedEvent, setEventDetailsOpen])
 
   const events: TimelineEvent[] = [
     {
@@ -499,7 +507,7 @@ export default function Timeline() {
 
       {/* Event Details Modal - Portal, damit fixed nicht vom Layout-Transform abgeschnitten wird */}
       {selectedEvent && createPortal(
-        <div className="fixed inset-0 top-16 md:top-20 z-50 bg-white dark:bg-gray-900 overflow-y-auto rounded-t-3xl">
+        <div className="fixed inset-0 top-16 md:top-20 z-50 bg-cream-30 dark:bg-gray-900 overflow-y-auto rounded-t-3xl">
           {/* Close Button */}
           <button
             onClick={() => setSelectedEvent(null)}
@@ -582,21 +590,21 @@ export default function Timeline() {
                     </h3>
                   </div>
                   <div className="ml-14 space-y-4">
-                    <div className="inline-block px-3 py-1 bg-cream-100 dark:bg-cream-700/30 text-gold-600 dark:text-gold-400 text-sm font-serif font-semibold rounded-full border border-cream-300 dark:border-cream-600">
-                      {t(selectedEvent.details.outfits.tagKey)}
-                    </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <h4 className="font-serif font-semibold text-gray-900 dark:text-white mb-2">
                           {t('outfits.men')}
                         </h4>
                         <ul className="space-y-2">
-                          {selectedEvent.details.outfits.men.map((itemKey, i) => (
-                            <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
-                              <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
-                              <span className="text-base font-serif">{t(itemKey)}</span>
-                            </li>
-                          ))}
+                          {selectedEvent.details.outfits.men.map((itemKey, i) => {
+                            const RecIcon = getOutfitRecIcon(itemKey)
+                            return (
+                              <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
+                                <RecIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
+                                <span className="text-base font-serif">{t(itemKey)}</span>
+                              </li>
+                            )
+                          })}
                         </ul>
                       </div>
                       <div>
@@ -604,12 +612,15 @@ export default function Timeline() {
                           {t('outfits.women')}
                         </h4>
                         <ul className="space-y-2">
-                          {selectedEvent.details.outfits.women.map((itemKey, i) => (
-                            <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
-                              <SparkleIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
-                              <span className="text-base font-serif">{t(itemKey)}</span>
-                            </li>
-                          ))}
+                          {selectedEvent.details.outfits.women.map((itemKey, i) => {
+                            const RecIcon = getOutfitRecIcon(itemKey)
+                            return (
+                              <li key={i} className="flex items-start space-x-2 text-gray-700 dark:text-gray-300">
+                                <RecIcon className="w-4 h-4 text-gold-500/70 dark:text-gold-400/70 mt-1 flex-shrink-0" />
+                                <span className="text-base font-serif">{t(itemKey)}</span>
+                              </li>
+                            )
+                          })}
                         </ul>
                       </div>
                     </div>

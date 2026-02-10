@@ -21,6 +21,8 @@ export default {
           900: '#5E4509',  // Sehr dunkel
         },
         cream: {
+          25: '#FFFEFC',   // Minimales Creme
+          30: '#FFFEFB',   // Sehr minimales Creme
           50: '#FFFEF9',   // Sehr helles Creme
           100: '#FFFDF5',  // Helles Creme
           200: '#FFF9E6',  // Creme

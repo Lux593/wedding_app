@@ -17,6 +17,7 @@ import {
 } from '@phosphor-icons/react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLanguage, Language } from '../contexts/LanguageContext'
+import { useEventDetails } from '../contexts/EventDetailsContext'
 
 // Flag Image Components
 const GermanFlag = ({ className }: { className?: string }) => (
@@ -61,6 +62,7 @@ export default function Layout({ children }: LayoutProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const { language, setLanguage, t } = useLanguage()
+  const { isOpen: isEventDetailsOpen } = useEventDetails()
   const location = useLocation()
 
   const navigation = [
@@ -292,7 +294,8 @@ export default function Layout({ children }: LayoutProps) {
         </>
       )}
 
-      {/* Footer */}
+      {/* Footer – ausgeblendet wenn Event-Details offen */}
+      {!isEventDetailsOpen && (
       <footer className={`mt-8 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-sm font-serif text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
@@ -302,6 +305,7 @@ export default function Layout({ children }: LayoutProps) {
           </p>
         </div>
       </footer>
+      )}
     </div>
   )
 }
