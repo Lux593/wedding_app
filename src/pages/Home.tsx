@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Sparkles, Heart } from 'lucide-react'
 import { 
@@ -9,8 +10,42 @@ import {
 } from 'react-icons/md'
 import { useLanguage } from '../contexts/LanguageContext'
 
+const WEDDING_DATE = new Date(2026, 10, 27, 9, 0, 0) // 27. Nov 2026, 09:00
+
+function useCountdown(targetDate: Date) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+  const [isFinished, setIsFinished] = useState(false)
+
+  useEffect(() => {
+    const update = () => {
+      const now = new Date()
+      const diff = targetDate.getTime() - now.getTime()
+
+      if (diff <= 0) {
+        setIsFinished(true)
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        return
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+      setTimeLeft({ days, hours, minutes, seconds })
+    }
+
+    update()
+    const interval = setInterval(update, 1000)
+    return () => clearInterval(interval)
+  }, [targetDate])
+
+  return { timeLeft, isFinished }
+}
+
 export default function Home() {
   const { t } = useLanguage()
+  const { timeLeft, isFinished } = useCountdown(WEDDING_DATE)
 
   const quickLinks = [
     { icon: MdEventNote, path: '/timeline', key: 'nav.timeline', descKey: 'home.timelineDesc' },
@@ -53,39 +88,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Welcome Message – weniger Abstand Herz-Icon→Willkommens-Box */}
-      <section className="max-w-[64.4rem] mx-auto text-center py-8 md:py-12 relative -mt-20 md:-mt-28">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-cream-300 dark:border-cream-600">
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <img
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80"
-              alt="Rahul & Simren Wedding"
-              className="w-full h-full object-cover"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/15 to-black/20"></div>
-          </div>
-          
-          {/* Content – mehr Abstand oben, damit Herz-Icon nicht abgeschnitten */}
-          <div className="relative bg-transparent rounded-3xl pt-14 pb-8 px-8 md:pt-20 md:pb-16 md:px-16">
-            <div className="flex justify-center mb-6">
-              <div className="p-4 bg-white/20 dark:bg-white/10 rounded-full backdrop-blur-sm border border-white/30">
-                <Heart className="w-8 h-8 text-white" />
+      {/* Countdown – bis zum 27. Nov 2026, 09:00 Uhr */}
+      <section className="flex justify-center -mt-4 md:-mt-6">
+        {isFinished ? (
+          <p className="text-lg md:text-xl font-serif font-semibold text-gold-600 dark:text-gold-400">
+            {t('home.countdown.started')}
+          </p>
+        ) : (
+          <div className="flex items-center gap-3 md:gap-4">
+            {[
+              { value: timeLeft.days, label: t('home.countdown.days') },
+              { value: timeLeft.hours, label: t('home.countdown.hours') },
+              { value: timeLeft.minutes, label: t('home.countdown.minutes') },
+              { value: timeLeft.seconds, label: t('home.countdown.seconds') },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center min-w-[4rem] md:min-w-[5rem] px-3 py-1.5 rounded-xl bg-cream-100/80 dark:bg-gray-800/80 border border-cream-300/60 dark:border-gray-600/60 backdrop-blur-sm"
+              >
+                <span className="text-2xl md:text-3xl font-serif font-bold text-gold-600 dark:text-gold-400 tabular-nums">
+                  {String(value).padStart(2, '0')}
+                </span>
+                <span className="text-[10px] md:text-xs font-serif font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider mt-0.5">
+                  {label}
+                </span>
               </div>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-serif font-semibold text-white mb-6 drop-shadow-2xl">
-              {t('home.welcome')}
-            </h2>
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <div className="h-px w-12 bg-white/90 dark:bg-white/80"></div>
-              <Sparkles className="w-4 h-4 text-white" />
-              <div className="h-px w-12 bg-white/90 dark:bg-white/80"></div>
-            </div>
-            <p className="text-white font-serif leading-relaxed text-lg drop-shadow-xl">
-              {t('home.welcomeText')}
-            </p>
+            ))}
           </div>
+        )}
+      </section>
+
+      {/* Welcome – Hochzeitsbild als fließender Hintergrund, ohne Kachel */}
+      <section className="relative -mx-4 sm:-mx-6 lg:-mx-8 -mt-20 md:-mt-28 min-h-[420px] md:min-h-[480px]">
+        {/* Hintergrundbild – randlos, kein Box-Effekt */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80"
+            alt="Rahul & Simren Wedding"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/25 to-black/50" />
+        </div>
+
+        {/* Content – über dem Hintergrund */}
+        <div className="relative z-10 min-h-[420px] md:min-h-[480px] flex flex-col justify-center items-center text-center pt-14 pb-12 px-6 md:pt-20 md:pb-20 md:px-12">
+          <div className="flex justify-center mb-6">
+            <div className="p-4 bg-white/20 dark:bg-white/10 rounded-full backdrop-blur-sm border border-white/30">
+              <Heart className="w-8 h-8 text-white" />
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-serif font-semibold text-white mb-6 drop-shadow-2xl">
+            {t('home.welcome')}
+          </h2>
+          <div className="flex items-center justify-center space-x-2 mb-6">
+            <div className="h-px w-12 bg-white/90 dark:bg-white/80" />
+            <Sparkles className="w-4 h-4 text-white" />
+            <div className="h-px w-12 bg-white/90 dark:bg-white/80" />
+          </div>
+          <p className="text-white font-serif leading-relaxed text-lg drop-shadow-xl max-w-2xl mx-auto">
+            {t('home.welcomeText')}
+          </p>
         </div>
       </section>
 

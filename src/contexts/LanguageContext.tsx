@@ -20,6 +20,9 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.outfits': 'Outfits',
     'nav.rsvp': 'RSVP',
     'nav.photos': 'Photos',
+    'nav.language': 'Sprache',
+    'nav.lightMode': 'Hell',
+    'nav.darkMode': 'Dunkel',
     
     // Home
     'home.title': 'Rahul & Simren',
@@ -33,6 +36,11 @@ const translations: Record<Language, Record<string, string>> = {
     'home.outfitsDesc': 'Outfit-Empfehlungen',
     'home.rsvpDesc': 'Zusage oder Absage',
     'home.photosDesc': 'Hochzeitsfotos',
+    'home.countdown.days': 'Tage',
+    'home.countdown.hours': 'Stunden',
+    'home.countdown.minutes': 'Minuten',
+    'home.countdown.seconds': 'Sekunden',
+    'home.countdown.started': 'Die Hochzeit hat begonnen!',
     
     // Timeline
     'timeline.title': 'Timeline',
@@ -166,6 +174,9 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.outfits': 'Outfits',
     'nav.rsvp': 'RSVP',
     'nav.photos': 'Photos',
+    'nav.language': 'Language',
+    'nav.lightMode': 'Light',
+    'nav.darkMode': 'Dark',
     
     // Home
     'home.title': 'Rahul & Simren',
@@ -179,6 +190,11 @@ const translations: Record<Language, Record<string, string>> = {
     'home.outfitsDesc': 'Outfit recommendations',
     'home.rsvpDesc': 'RSVP',
     'home.photosDesc': 'Wedding photos',
+    'home.countdown.days': 'Days',
+    'home.countdown.hours': 'Hours',
+    'home.countdown.minutes': 'Minutes',
+    'home.countdown.seconds': 'Seconds',
+    'home.countdown.started': 'The wedding has begun!',
     
     // Timeline
     'timeline.title': 'Timeline',
@@ -312,6 +328,9 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.outfits': 'Tenues',
     'nav.rsvp': 'RSVP',
     'nav.photos': 'Photos',
+    'nav.language': 'Langue',
+    'nav.lightMode': 'Clair',
+    'nav.darkMode': 'Sombre',
     
     // Home
     'home.title': 'Rahul & Simren',
@@ -325,6 +344,11 @@ const translations: Record<Language, Record<string, string>> = {
     'home.outfitsDesc': 'Recommandations de tenue',
     'home.rsvpDesc': 'RSVP',
     'home.photosDesc': 'Photos de mariage',
+    'home.countdown.days': 'Jours',
+    'home.countdown.hours': 'Heures',
+    'home.countdown.minutes': 'Minutes',
+    'home.countdown.seconds': 'Secondes',
+    'home.countdown.started': 'Le mariage a commencé !',
     
     // Timeline
     'timeline.title': 'Programme',

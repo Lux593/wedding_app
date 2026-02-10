@@ -211,7 +211,6 @@ export default function Outfits() {
 
           const isOpen = openDates.has(date)
           const isFirst = index === 0
-          const isLast = index === dateOrder.length - 1
 
           const toggleDate = () => {
             const newOpenDates = new Set(openDates)
@@ -231,35 +230,27 @@ export default function Outfits() {
                   aria-hidden
                 />
               )}
-              {/* Date Header – bei letzter Kachel in Wrapper, damit unterer Knoten exakt 10px unter Kachelkante liegt */}
-              <div className={isLast ? 'relative w-full' : ''}>
-                <button
-                  onClick={toggleDate}
-                  className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
-                >
-                  <div className="flex items-center justify-center space-x-4">
-                    <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
-                      {t(`timeline.date.${date}`)}
-                    </h2>
-                    {isOpen ? (
-                      <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                    ) : (
-                      <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                    )}
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 mt-3">
-                    <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                    <MdCheckroom className="w-3 h-3 text-gold-500 dark:text-gold-400" />
-                    <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  </div>
-                </button>
-                {isLast && (
-                  <div
-                    className="absolute left-1/2 top-full mt-5 -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
-                    aria-hidden
-                  />
-                )}
-              </div>
+              {/* Date Header */}
+              <button
+                onClick={toggleDate}
+                className="relative w-full text-center p-6 rounded-2xl bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+              >
+                <div className="flex items-center justify-center space-x-4">
+                  <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
+                    {t(`timeline.date.${date}`)}
+                  </h2>
+                  {isOpen ? (
+                    <ChevronUp className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
+                  )}
+                </div>
+                <div className="flex items-center justify-center space-x-2 mt-3">
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                  <MdCheckroom className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
+                </div>
+              </button>
 
               {/* Outfit Suggestions for this date - Only show if open */}
               {isOpen && (
@@ -347,6 +338,13 @@ export default function Outfits() {
           )
         })}
         </div>
+        {/* Knotenpunkt am Ende der Verbindungslinie – 36px unter letzter Karte, symmetrisch zum Startpunkt */}
+        {dateOrder.length > 0 && (
+          <div
+            className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[16px] z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
+            aria-hidden
+          />
+        )}
       </div>
     </div>
   )

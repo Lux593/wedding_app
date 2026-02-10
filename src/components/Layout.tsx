@@ -130,62 +130,58 @@ export default function Layout({ children }: LayoutProps) {
               ))}
             </nav>
 
-            {/* Right side: Language + Theme Toggle + Mobile Menu */}
+            {/* Right side: Desktop = Language + Theme, Mobile = nur Menu-Button (Sprache/Theme in Sidebar) */}
             <div className="flex items-center space-x-2">
-              {/* Language Selector */}
-              <div className="relative">
+              {/* Language + Theme – nur auf Desktop im Header */}
+              <div className="hidden md:flex items-center space-x-2">
+                <div className="relative">
+                  <button
+                    onClick={() => (isLangMenuOpen ? setIsLangMenuOpen(false) : openLangMenu())}
+                    className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center space-x-1"
+                    aria-label="Change language"
+                  >
+                    <MdLanguage className="w-5 h-5" />
+                    <span className="hidden sm:inline">
+                      {languages.find(l => l.code === language)?.flagComponent || <MdLanguage className="w-4 h-4" />}
+                    </span>
+                  </button>
+                  {isLangMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setLanguage(lang.code)
+                            setIsLangMenuOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm flex items-center space-x-2 transition-colors ${
+                            language === lang.code
+                              ? 'bg-cream-50 dark:bg-cream-700/20 text-gold-600 dark:text-gold-400'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          }`}
+                        >
+                          <span className="mr-3 flex items-center">{lang.flagComponent}</span>
+                          <span className="flex-1">{lang.name}</span>
+                          {language === lang.code && (
+                            <span className="ml-auto text-gold-600 dark:text-gold-400">✓</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <button
-                  onClick={() => (isLangMenuOpen ? setIsLangMenuOpen(false) : openLangMenu())}
-                  className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center space-x-1"
-                  aria-label="Change language"
+                  onClick={toggleTheme}
+                  className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Toggle theme"
                 >
-                  <MdLanguage className="w-5 h-5" />
-                  <span className="hidden sm:inline">
-                    {languages.find(l => l.code === language)?.flagComponent || <MdLanguage className="w-4 h-4" />}
-                  </span>
+                  {theme === 'dark' ? (
+                    <MdLightMode className="w-5 h-5" />
+                  ) : (
+                    <MdDarkMode className="w-5 h-5" />
+                  )}
                 </button>
-                
-                {/* Language Dropdown */}
-                {isLangMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code)
-                          setIsLangMenuOpen(false)
-                        }}
-                        className={`w-full text-left px-4 py-2 text-sm flex items-center space-x-2 transition-colors ${
-                          language === lang.code
-                            ? 'bg-cream-50 dark:bg-cream-700/20 text-gold-600 dark:text-gold-400'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                        }`}
-                      >
-                        <span className="mr-3 flex items-center">
-                          {lang.flagComponent}
-                        </span>
-                        <span className="flex-1">{lang.name}</span>
-                        {language === lang.code && (
-                          <span className="ml-auto text-gold-600 dark:text-gold-400">✓</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
-
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <MdLightMode className="w-5 h-5" />
-                ) : (
-                  <MdDarkMode className="w-5 h-5" />
-                )}
-              </button>
 
               {/* Mobile Menu Button */}
               <button
@@ -221,10 +217,10 @@ export default function Layout({ children }: LayoutProps) {
             aria-hidden
           />
           <div
-            className="md:hidden fixed right-0 top-16 z-50 w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar"
+            className="md:hidden fixed right-0 top-16 z-50 w-64 bg-white dark:bg-gray-900 border-l-2 border-gray-300 dark:border-gray-600 shadow-2xl rounded-l-lg mobile-menu-sidebar flex flex-col max-h-[calc(100vh-4rem)]"
             onClick={(e) => e.stopPropagation()}
           >
-            <nav className="px-4 py-6 space-y-2">
+            <nav className="px-4 py-6 space-y-2 flex-1 overflow-y-auto">
               {navigation.map((item) => {
                 const Icon = item.icon
                 return (
@@ -244,6 +240,53 @@ export default function Layout({ children }: LayoutProps) {
                 )
               })}
             </nav>
+            {/* Sprache & Theme – nur zwei Symbole, Sprachauswahl öffnet sich beim Klick */}
+            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-center space-x-2 flex-shrink-0">
+              <div className="relative">
+                <button
+                  onClick={() => setIsLangMenuOpen(prev => !prev)}
+                  className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Change language"
+                >
+                  <MdLanguage className="w-5 h-5" />
+                </button>
+                {isLangMenuOpen && (
+                  <div className="absolute left-0 bottom-full mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code)
+                          setIsLangMenuOpen(false)
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm flex items-center space-x-2 transition-colors ${
+                          language === lang.code
+                            ? 'bg-cream-50 dark:bg-cream-700/20 text-gold-600 dark:text-gold-400'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                      >
+                        <span className="mr-3 flex items-center">{lang.flagComponent}</span>
+                        <span className="flex-1">{lang.name}</span>
+                        {language === lang.code && (
+                          <span className="ml-auto text-gold-600 dark:text-gold-400">✓</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <MdLightMode className="w-5 h-5" />
+                ) : (
+                  <MdDarkMode className="w-5 h-5" />
+                )}
+              </button>
+            </div>
           </div>
         </>
       )}
