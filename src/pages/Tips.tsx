@@ -5,92 +5,82 @@ import {
   MapPinIcon,
   StarIcon,
   ClockIcon,
-  CurrencyCircleDollarIcon,
   LinkIcon,
   ForkKnifeIcon,
   BinocularsIcon,
   TrendUpIcon,
 } from '@phosphor-icons/react'
-import { useLanguage } from '../contexts/LanguageContext'
 
 interface Tip {
   category: 'restaurant' | 'activity' | 'sightseeing'
-  nameKey: string
-  descriptionKey: string
+  name: string
+  description: string
   location: string
   address?: string
-  priceLevel?: number // 1-4 ($, $$, $$$, $$$$)
   duration?: string
   website?: string
   imageUrl?: string
 }
 
 export default function Tips() {
-  const { t } = useLanguage()
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(['restaurant']))
 
   const tips: Tip[] = [
     // Restaurants
     {
       category: 'restaurant',
-      nameKey: 'tips.restaurant.name1',
-      descriptionKey: 'tips.restaurant.desc1',
+      name: 'Restaurant Kronenhalle',
+      description: 'Traditionelles Schweizer Restaurant mit exzellenter Küche und historischem Ambiente.',
       location: 'Zürich Altstadt',
-      address: 'Münsterhof 8, 8001 Zürich',
-      priceLevel: 3,
-      website: 'https://example.com',
+      address: 'Rämistrasse 4, 8001 Zürich',
+      website: 'https://www.kronenhalle.com',
       imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
     },
     {
       category: 'restaurant',
-      nameKey: 'tips.restaurant.name2',
-      descriptionKey: 'tips.restaurant.desc2',
+      name: 'Seerestaurant Quai 61',
+      description: 'Modernes Restaurant direkt am Zürichsee mit herrlicher Aussicht.',
       location: 'Zürich See',
-      address: 'Seestrasse 100, 8002 Zürich',
-      priceLevel: 2,
-      website: 'https://example.com',
+      address: 'Bellerivestrasse 170, 8008 Zürich',
+      website: 'https://www.quai61.ch',
       imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
     },
     // Activities
     {
       category: 'activity',
-      nameKey: 'tips.activity.name1',
-      descriptionKey: 'tips.activity.desc1',
+      name: 'Bootsfahrt auf dem Zürichsee',
+      description: 'Entspannte Rundfahrt mit wunderbaren Aussichten auf die Stadt und die Alpen.',
       location: 'Zürichsee',
       duration: '2-3 Stunden',
-      priceLevel: 2,
-      website: 'https://example.com',
+      website: 'https://www.zsg.ch',
       imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
     },
     {
       category: 'activity',
-      nameKey: 'tips.activity.name2',
-      descriptionKey: 'tips.activity.desc2',
+      name: 'Wanderung auf den Uetliberg',
+      description: 'Der Hausberg Zürichs bietet eine fantastische Panoramaaussicht über die Stadt und den See.',
       location: 'Uetliberg',
       duration: '3-4 Stunden',
-      priceLevel: 1,
-      website: 'https://example.com',
+      website: 'https://www.uetliberg.ch',
       imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80',
     },
     // Sightseeing
     {
       category: 'sightseeing',
-      nameKey: 'tips.sightseeing.name1',
-      descriptionKey: 'tips.sightseeing.desc1',
+      name: 'Grossmünster',
+      description: 'Die berühmte Kirche ist eines der Wahrzeichen Zürichs mit beeindruckender Architektur.',
       location: 'Zürich Zentrum',
       address: 'Grossmünsterplatz, 8001 Zürich',
       duration: '1-2 Stunden',
-      priceLevel: 1,
       imageUrl: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80',
     },
     {
       category: 'sightseeing',
-      nameKey: 'tips.sightseeing.name2',
-      descriptionKey: 'tips.sightseeing.desc2',
+      name: 'Bahnhofstrasse',
+      description: 'Eine der exklusivsten Einkaufsstraßen der Welt mit Luxusgeschäften und Cafés.',
       location: 'Zürich Altstadt',
       address: 'Bahnhofstrasse, 8001 Zürich',
       duration: '2-3 Stunden',
-      priceLevel: 2,
       imageUrl: 'https://images.unsplash.com/photo-1559564765-23eb41ffc78f?w=800&q=80',
     },
   ]
@@ -98,19 +88,19 @@ export default function Tips() {
   const categories = [
     {
       id: 'restaurant',
-      nameKey: 'tips.restaurants',
+      name: 'Restaurants',
       icon: ForkKnifeIcon,
       color: 'from-rose-500/40 to-pink-500/50',
     },
     {
       id: 'activity',
-      nameKey: 'tips.activities',
+      name: 'Aktivitäten',
       icon: TrendUpIcon,
       color: 'from-blue-500/40 to-cyan-500/50',
     },
     {
       id: 'sightseeing',
-      nameKey: 'tips.sightseeing',
+      name: 'Sehenswürdigkeiten',
       icon: BinocularsIcon,
       color: 'from-purple-500/40 to-indigo-500/50',
     },
@@ -134,22 +124,12 @@ export default function Tips() {
     setOpenCategories(newOpenCategories)
   }
 
-  const renderPriceLevel = (level: number) => {
-    return Array.from({ length: 4 }).map((_, i) => (
-      <CurrencyCircleDollarIcon
-        key={i}
-        className={`w-4 h-4 ${i < level ? 'text-gold-500 dark:text-gold-400' : 'text-gray-300 dark:text-gray-600'}`}
-        weight={i < level ? 'fill' : 'regular'}
-      />
-    ))
-  }
-
   return (
     <div className="max-w-6xl mx-auto">
       {/* Header */}
       <div className="text-center mb-6 md:mb-8 relative max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-          {t('tips.title') || 'Empfehlungen'}
+          Tipps & Empfehlungen
         </h1>
         <div className="flex items-center justify-center space-x-2">
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
@@ -157,7 +137,7 @@ export default function Tips() {
           <div className="h-px w-16 bg-gold-300 dark:bg-gold-600"></div>
         </div>
         <p className="mt-4 text-base md:text-lg font-serif text-gray-600 dark:text-gray-400 w-full max-w-[650px] mx-auto px-2.5">
-          {t('tips.subheader') || 'Unsere Tipps für Restaurants, Aktivitäten und Sehenswürdigkeiten in Zürich'}
+          Unsere Tipps für Restaurants, Aktivitäten und Sehenswürdigkeiten in Zürich
         </p>
       </div>
 
@@ -188,7 +168,7 @@ export default function Tips() {
                 >
                   <div className="flex items-center justify-center space-x-4">
                     <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
-                      {t(category.nameKey)}
+                      {category.name}
                     </h2>
                     {isOpen ? (
                       <CaretUpIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
@@ -219,7 +199,7 @@ export default function Tips() {
                         <div className="relative h-48 overflow-hidden">
                           <img
                             src={tip.imageUrl}
-                            alt={t(tip.nameKey)}
+                            alt={tip.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
@@ -231,12 +211,12 @@ export default function Tips() {
                       <div className="p-6 space-y-4">
                         {/* Title */}
                         <h3 className="text-xl md:text-2xl font-serif font-bold text-gray-900 dark:text-white">
-                          {t(tip.nameKey)}
+                          {tip.name}
                         </h3>
 
                         {/* Description */}
                         <p className="text-gray-700 dark:text-gray-300 font-serif text-sm leading-relaxed">
-                          {t(tip.descriptionKey)}
+                          {tip.description}
                         </p>
 
                         {/* Details */}
@@ -259,13 +239,6 @@ export default function Tips() {
                             <div className="flex items-center space-x-2 text-sm">
                               <ClockIcon className="w-4 h-4 text-gold-500 dark:text-gold-400 flex-shrink-0" />
                               <span className="font-serif text-gray-700 dark:text-gray-300">{tip.duration}</span>
-                            </div>
-                          )}
-
-                          {/* Price Level */}
-                          {tip.priceLevel && (
-                            <div className="flex items-center space-x-2">
-                              {renderPriceLevel(tip.priceLevel)}
                             </div>
                           )}
 
