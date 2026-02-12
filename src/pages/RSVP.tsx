@@ -18,6 +18,7 @@ interface RSVPFormData {
   name: string
   email: string
   numberOfGuests: number
+  guestNames: string[]
   hasAllergies: boolean
   allergies: string
   message: string
@@ -30,6 +31,7 @@ export default function RSVP() {
     name: '',
     email: '',
     numberOfGuests: 1,
+    guestNames: [],
     hasAllergies: false,
     allergies: '',
     message: '',
@@ -56,6 +58,7 @@ export default function RSVP() {
         name: '',
         email: '',
         numberOfGuests: 1,
+        guestNames: [],
         hasAllergies: false,
         allergies: '',
         message: '',
@@ -66,14 +69,14 @@ export default function RSVP() {
   if (isSubmitted) {
     const modal = (
       <div
-        className="fixed inset-0 z-[110] flex items-center justify-center bg-black/40 backdrop-blur-sm"
+        className="fixed inset-0 z-[110] flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-300"
         style={{
           padding: 'max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left))',
           minHeight: '100dvh',
           boxSizing: 'border-box',
         }}
       >
-        <div className="max-w-2xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto bg-cream-200/95 dark:bg-cream-800/95 border-2 border-cream-400/80 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative backdrop-blur-sm">
+        <div className="max-w-2xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto bg-rose-200 dark:bg-gray-800 border-2 border-rose-200 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative backdrop-blur-sm animate-in slide-in-from-bottom-4 duration-300">
           <div className="relative z-10">
             <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rsvp-heart-pulse" aria-hidden>
               <svg
@@ -140,7 +143,7 @@ export default function RSVP() {
         </p>
       </div>
 
-      <div className="bg-cream-200/90 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
+      <div className="bg-rose-50 dark:bg-gray-800 border-2 border-rose-200 dark:border-gray-600 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
         <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
           {/* Attending */}
           <div>
@@ -164,7 +167,7 @@ export default function RSVP() {
                 <div
                   className={`h-32 p-6 rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center ${
                     formData.attending === 'yes'
-                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40 rsvp-option-selected'
+                      ? 'border-gold-500 bg-gold-500 dark:bg-gold-700 text-white shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40 rsvp-option-selected'
                       : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-600'
                   }`}
                 >
@@ -187,7 +190,7 @@ export default function RSVP() {
                 <div
                   className={`h-32 p-6 rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center ${
                     formData.attending === 'no'
-                      ? 'border-gold-500 bg-gold-300 dark:bg-gold-800/60 text-gold-900 dark:text-gold-200 shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40 rsvp-option-selected'
+                      ? 'border-gold-500 bg-gold-500 dark:bg-gold-700 text-white shadow-lg scale-105 ring-2 ring-gold-400/50 dark:ring-gold-500/40 rsvp-option-selected'
                       : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gold-300 dark:hover:border-gold-600'
                   }`}
                 >
@@ -245,15 +248,48 @@ export default function RSVP() {
                 min="1"
                 max="10"
                 value={formData.numberOfGuests}
-                onChange={(e) =>
-                  setFormData({ ...formData, numberOfGuests: parseInt(e.target.value) || 1 })
-                }
+                onChange={(e) => {
+                  const newNumber = parseInt(e.target.value) || 1
+                  const additionalGuests = Math.max(0, newNumber - 1)
+                  const newGuestNames = Array(additionalGuests).fill('').map((_, i) => formData.guestNames[i] || '')
+                  setFormData({ ...formData, numberOfGuests: newNumber, guestNames: newGuestNames })
+                }}
                 className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
                 required
               />
               <p className="mt-2 text-sm font-serif text-gray-500 dark:text-gray-400">
                 {t('rsvp.guestsDesc')}
               </p>
+            </div>
+          )}
+
+          {/* Additional Guest Names */}
+          {formData.attending === 'yes' && formData.numberOfGuests > 1 && (
+            <div>
+              <label className="block text-base font-serif font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+                <UsersIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+                <span>Namen der weiteren Gäste *</span>
+              </label>
+              <p className="text-sm font-serif text-gray-500 dark:text-gray-400 mb-4">
+                Bitte gib die vollständigen Namen aller weiteren Gäste an.
+              </p>
+              <div className="space-y-3">
+                {Array.from({ length: formData.numberOfGuests - 1 }).map((_, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    value={formData.guestNames[index] || ''}
+                    onChange={(e) => {
+                      const newGuestNames = [...formData.guestNames]
+                      newGuestNames[index] = e.target.value
+                      setFormData({ ...formData, guestNames: newGuestNames })
+                    }}
+                    placeholder={`Vollständiger Name des Gastes ${index + 1}`}
+                    className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-serif placeholder-gray-400 focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all"
+                    required
+                  />
+                ))}
+              </div>
             </div>
           )}
 

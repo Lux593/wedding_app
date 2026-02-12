@@ -181,7 +181,7 @@ export default function Outfits() {
             onClick={() => setActiveTab('men')}
             className={`px-6 py-3 rounded-lg font-serif font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'men'
-                ? 'bg-gold-500 text-white dark:bg-gold-600 shadow-lg'
+                ? 'bg-gold-600 text-white dark:bg-gold-700 shadow-lg'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
@@ -192,7 +192,7 @@ export default function Outfits() {
             onClick={() => setActiveTab('women')}
             className={`px-6 py-3 rounded-lg font-serif font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'women'
-                ? 'bg-gold-500 text-white dark:bg-gold-600 shadow-lg'
+                ? 'bg-gold-600 text-white dark:bg-gold-700 shadow-lg'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
@@ -227,14 +227,14 @@ export default function Outfits() {
             <div key={date} className="relative space-y-4">
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[36px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[36px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -248,18 +248,21 @@ export default function Outfits() {
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <CoatHangerIcon className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <CoatHangerIcon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
                 </div>
               </button>
 
               {/* Outfit Suggestions for this date - Only show if open */}
-              {isOpen && (
-                <div className="space-y-8 md:space-y-12 mt-6">
+              <div
+                className={`space-y-8 md:space-y-12 mt-6 transition-all duration-500 ease-in-out origin-top ${
+                  isOpen ? 'opacity-100 scale-y-100 max-h-[10000px]' : 'opacity-0 scale-y-95 max-h-0 overflow-hidden'
+                }`}
+              >
                   {daySuggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="group bg-cream-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-cream-300 dark:hover:border-cream-500 transition-all relative z-10 overflow-hidden"
+                    className="group bg-rose-50 dark:bg-gray-800 border-2 border-rose-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:border-gold-300 dark:hover:border-cream-500 transition-all relative z-10 overflow-hidden"
                   >
             {/* Header */}
             <div className="flex items-start space-x-4 mb-6 relative z-10">
@@ -285,16 +288,17 @@ export default function Outfits() {
               {/* Outfit Image */}
               <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700">
                 <img
+                  key={activeTab}
                   src={activeTab === 'men' ? suggestion.menOutfitImage : suggestion.womenOutfitImage}
                   alt={`${t(suggestion.eventKey)} - ${activeTab === 'men' ? t('outfits.men') : t('outfits.women')}`}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover animate-in fade-in duration-300"
                   loading="lazy"
                 />
               </div>
 
               {/* Recommendations */}
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-                <ul className="space-y-3">
+                <ul key={activeTab} className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
                   {(activeTab === 'men' ? suggestion.recommendations.men : suggestion.recommendations.women).map((itemKey, i) => {
                     const RecIcon = getOutfitRecIcon(itemKey)
                     return (
@@ -333,8 +337,7 @@ export default function Outfits() {
             </div>
                   </div>
                   ))}
-                </div>
-              )}
+              </div>
             </div>
           )
         })}

@@ -104,14 +104,14 @@ export default function Locations() {
             <div key={date} className="relative space-y-4">
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[18px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[18px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -125,14 +125,17 @@ export default function Locations() {
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <MapPinIcon className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <MapPinIcon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
                 </div>
               </button>
 
               {/* Locations for this date - Only show if open */}
-              {isOpen && (
-                <div className="space-y-8 md:space-y-12 mt-6">
+              <div
+                className={`space-y-8 md:space-y-12 mt-6 transition-all duration-500 ease-in-out origin-top ${
+                  isOpen ? 'opacity-100 scale-y-100 max-h-[10000px]' : 'opacity-0 scale-y-95 max-h-0 overflow-hidden'
+                }`}
+              >
                 {dayLocations.map((location, index) => (
           <div
             key={index}
@@ -206,8 +209,7 @@ export default function Locations() {
             </div>
           </div>
                 ))}
-                </div>
-              )}
+              </div>
             </div>
           )
         })}

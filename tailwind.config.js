@@ -9,16 +9,16 @@ export default {
     extend: {
       colors: {
         gold: {
-          50: '#FFFAF0',   // Sehr helles Creme
-          100: '#FFF5E6',  // Helles Creme
-          200: '#FFEECC',  // Creme
-          300: '#FFE4B3',  // Mittel Creme
-          400: '#FFD89C',  // Kräftigeres Creme
-          500: '#D4AF37',  // Haupt Gold
-          600: '#B8941F',  // Dunkleres Gold
-          700: '#9A7A15',  // Sehr dunkles Gold
-          800: '#7C5F0F',  // Fast braun
-          900: '#5E4509',  // Sehr dunkel
+          50: '#FAF8F3',   // Sehr helles Champagner
+          100: '#F5F1E8',  // Helles Champagner
+          200: '#EBE3D0',  // Helles Gold
+          300: '#D9C9A8',  // Mittel Champagner-Gold
+          400: '#C7AF80',  // Kräftiges Champagner-Gold
+          500: '#B89968',  // Haupt Luxus-Gold
+          600: '#A0804D',  // Dunkleres Luxus-Gold
+          700: '#87683A',  // Sehr dunkles Gold
+          800: '#6E5330',  // Bronze-Gold
+          900: '#554026',  // Sehr dunkel
         },
         cream: {
           25: '#FFFEFC',   // Minimales Creme

@@ -14,6 +14,7 @@ import {
   CoatHangerIcon,
   EnvelopeIcon,
   CameraIcon,
+  StarIcon,
 } from '@phosphor-icons/react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLanguage, Language } from '../contexts/LanguageContext'
@@ -70,6 +71,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: t('nav.timeline'), path: '/timeline', key: 'nav.timeline', icon: CalendarBlankIcon },
     { name: t('nav.locations'), path: '/locations', key: 'nav.locations', icon: MapPinIcon },
     { name: t('nav.outfits'), path: '/outfits', key: 'nav.outfits', icon: CoatHangerIcon },
+    { name: t('nav.tips'), path: '/tips', key: 'nav.tips', icon: StarIcon },
     { name: t('nav.rsvp'), path: '/rsvp', key: 'nav.rsvp', icon: EnvelopeIcon },
     { name: t('nav.photos'), path: '/photos', key: 'nav.photos', icon: CameraIcon },
   ]
@@ -149,7 +151,7 @@ export default function Layout({ children }: LayoutProps) {
                     </span>
                   </button>
                   {isLangMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+                    <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
@@ -215,7 +217,7 @@ export default function Layout({ children }: LayoutProps) {
       {isMenuOpen && (
         <>
           <div
-            className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-[90] bg-black/20 dark:bg-black/30 cursor-pointer"
+            className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-[90] bg-black/20 dark:bg-black/30 cursor-pointer mobile-menu-backdrop"
             onClick={() => setIsMenuOpen(false)}
             aria-hidden
           />
@@ -254,7 +256,7 @@ export default function Layout({ children }: LayoutProps) {
                   <GlobeIcon className="w-5 h-5" />
                 </button>
                 {isLangMenuOpen && (
-                  <div className="absolute left-0 bottom-full mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+                  <div className="absolute left-0 bottom-full mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}

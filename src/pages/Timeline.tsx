@@ -403,14 +403,14 @@ export default function Timeline() {
               {/* Knotenpunkt oberhalb der ersten Kachel */}
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[18px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[18px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-cream-400/80 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-400 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -424,14 +424,17 @@ export default function Timeline() {
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
-                  <CalendarBlankIcon className="w-3 h-3 text-gold-500 dark:text-gold-400" />
+                  <CalendarBlankIcon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
                 </div>
               </button>
 
               {/* Events Grid for this date - Only show if open */}
-              {isOpen && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-6">
+              <div
+                className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-6 transition-all duration-500 ease-in-out origin-top ${
+                  isOpen ? 'opacity-100 scale-y-100 max-h-[10000px]' : 'opacity-0 scale-y-95 max-h-0 overflow-hidden'
+                }`}
+              >
                 {dayEvents.map((event, index) => {
           return (
             <div
@@ -488,8 +491,7 @@ export default function Timeline() {
             </div>
                 )
               })}
-                </div>
-              )}
+              </div>
             </div>
           )
         })}
@@ -507,7 +509,7 @@ export default function Timeline() {
 
       {/* Event Details Modal - Portal, damit fixed nicht vom Layout-Transform abgeschnitten wird */}
       {selectedEvent && createPortal(
-        <div className="fixed inset-0 top-16 md:top-20 z-50 bg-cream-30 dark:bg-gray-900 overflow-y-auto rounded-t-3xl">
+        <div className="fixed inset-0 top-16 md:top-20 z-50 bg-rose-50 dark:bg-gray-900 overflow-y-auto rounded-t-3xl animate-in fade-in slide-in-from-bottom-4 duration-300">
           {/* Close Button */}
           <button
             onClick={() => setSelectedEvent(null)}

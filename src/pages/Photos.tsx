@@ -108,7 +108,7 @@ export default function Photos() {
       {/* Lightbox Modal – Portal, damit nicht vom Layout abgeschnitten; scrollbar bei hohen Fotos */}
       {selectedImage !== null && createPortal(
         <div
-          className="fixed inset-0 top-0 z-[110] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm"
+          className="fixed inset-0 top-0 z-[110] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm animate-in fade-in duration-300"
         >
           {/* Schließen-Button oben rechts, gleiches Design wie Vor/Zurück, fixiert */}
           <button
@@ -118,7 +118,7 @@ export default function Photos() {
           >
             <XIcon className="w-6 h-6" />
           </button>
-          <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0 px-4" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0 px-4 animate-in slide-in-from-bottom-4 duration-300" onClick={(e) => e.stopPropagation()}>
             <img
               src={weddingPhotos.find(img => img.id === selectedImage)?.url}
               alt={weddingPhotos.find(img => img.id === selectedImage)?.alt}

@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Timeline from './pages/Timeline'
 import Locations from './pages/Locations'
 import Outfits from './pages/Outfits'
+import Tips from './pages/Tips'
 import RSVP from './pages/RSVP'
 import Photos from './pages/Photos'
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/locations" element={<Locations />} />
               <Route path="/outfits" element={<Outfits />} />
+              <Route path="/tips" element={<Tips />} />
               <Route path="/rsvp" element={<RSVP />} />
               <Route path="/photos" element={<Photos />} />
             </Routes>
