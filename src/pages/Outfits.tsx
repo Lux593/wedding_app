@@ -1,7 +1,7 @@
 import {
   PaletteIcon,
-  CaretDownIcon,
-  CaretUpIcon,
+  CaretCircleDownIcon,
+  CaretCircleUpIcon,
   CoatHangerIcon,
   CalendarBlankIcon,
   GenderMaleIcon,
@@ -203,9 +203,9 @@ export default function Outfits() {
       </div>
 
       {/* Outfit Suggestions grouped by date – Zeitstrahl verbindet die Kacheln inkl. oberer/unterer Verbindungspunkte */}
-      <div className="relative pt-[36px] pb-[36px]">
+      <div className="relative pt-[24px] pb-[24px]">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-300 dark:from-gold-600 dark:via-gold-500 dark:to-gold-600 z-0" aria-hidden />
-        <div className="space-y-6 md:space-y-8 relative z-10">
+        <div className="space-y-3 md:space-y-4 relative z-10">
         {dateOrder.map((date, index) => {
           const daySuggestions = suggestionsByDate[date] || []
           if (daySuggestions.length === 0) return null
@@ -227,7 +227,7 @@ export default function Outfits() {
             <div key={date} className="relative space-y-4">
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[36px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[24px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
@@ -236,15 +236,17 @@ export default function Outfits() {
                 onClick={toggleDate}
                 className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
               >
-                <div className="flex items-center justify-center space-x-4">
+                <div className="flex items-center justify-center">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
                     {t(`timeline.date.${date}`)}
                   </h2>
-                  {isOpen ? (
-                    <CaretUpIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  ) : (
-                    <CaretDownIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  )}
+                  <div className="absolute right-6">
+                    {isOpen ? (
+                      <CaretCircleUpIcon className="w-7 h-7 text-gold-600/60 dark:text-gold-400/60 transition-transform" weight="fill" />
+                    ) : (
+                      <CaretCircleDownIcon className="w-7 h-7 text-gold-600/60 dark:text-gold-400/60 transition-transform" weight="fill" />
+                    )}
+                  </div>
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
@@ -345,7 +347,7 @@ export default function Outfits() {
         {/* Knotenpunkt am Ende der Verbindungslinie – 36px unter letzter Karte, symmetrisch zum Startpunkt */}
         {dateOrder.length > 0 && (
           <div
-            className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[16px] z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
+            className="absolute left-1/2 bottom-0 -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
             aria-hidden
           />
         )}

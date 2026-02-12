@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
-  CaretDownIcon,
-  CaretUpIcon,
+  CaretCircleDownIcon,
+  CaretCircleUpIcon,
   MapPinIcon,
   ArrowSquareOutIcon,
 } from '@phosphor-icons/react'
@@ -80,9 +80,9 @@ export default function Locations() {
       </div>
 
       {/* Locations grouped by date – Zeitstrahl verbindet die Kacheln inkl. oberer/unterer Verbindungspunkte */}
-      <div className="relative pt-[18px] pb-[36px]">
+      <div className="relative pt-[24px] pb-[24px]">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-300 dark:from-gold-600 dark:via-gold-500 dark:to-gold-600 z-0" aria-hidden />
-        <div className="space-y-6 md:space-y-8 relative z-10">
+        <div className="space-y-3 md:space-y-4 relative z-10">
         {dateOrder.map((date, index) => {
           const dayLocations = locationsByDate[date] || []
           if (dayLocations.length === 0) return null
@@ -104,7 +104,7 @@ export default function Locations() {
             <div key={date} className="relative space-y-4">
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[18px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[24px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
@@ -113,15 +113,17 @@ export default function Locations() {
                 onClick={toggleDate}
                 className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
               >
-                <div className="flex items-center justify-center space-x-4">
+                <div className="flex items-center justify-center">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
                     {t(`timeline.date.${date}`)}
                   </h2>
-                  {isOpen ? (
-                    <CaretUpIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  ) : (
-                    <CaretDownIcon className="w-6 h-6 text-gold-600 dark:text-gold-400 transition-transform" />
-                  )}
+                  <div className="absolute right-6">
+                    {isOpen ? (
+                      <CaretCircleUpIcon className="w-7 h-7 text-gold-600/60 dark:text-gold-400/60 transition-transform" weight="fill" />
+                    ) : (
+                      <CaretCircleDownIcon className="w-7 h-7 text-gold-600/60 dark:text-gold-400/60 transition-transform" weight="fill" />
+                    )}
+                  </div>
                 </div>
                 <div className="flex items-center justify-center space-x-2 mt-3">
                   <div className="h-px w-12 bg-gold-300 dark:bg-gold-600"></div>
@@ -132,78 +134,79 @@ export default function Locations() {
 
               {/* Locations for this date - Only show if open */}
               <div
-                className={`space-y-8 md:space-y-12 mt-6 transition-all duration-500 ease-in-out origin-top ${
+                className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-6 transition-all duration-500 ease-in-out origin-top ${
                   isOpen ? 'opacity-100 scale-y-100 max-h-[10000px]' : 'opacity-0 scale-y-95 max-h-0 overflow-hidden'
                 }`}
               >
                 {dayLocations.map((location, index) => (
           <div
             key={index}
-            className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl border-2 border-cream-300/30 dark:border-cream-600/50 hover:border-gold-400 dark:hover:border-gold-500 transition-all hover:-translate-y-2"
+            className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-rose-200 dark:border-gray-700 hover:border-gold-400 dark:hover:border-gold-500 hover:-translate-y-2 bg-white dark:bg-gray-800"
           >
-            {/* Background Image */}
-            <div className="absolute inset-0">
+            {/* Image */}
+            <div className="relative h-48 overflow-hidden">
               <img
                 src={location.nameKey === 'locations.ceremony'
-                  ? 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80'
+                  ? 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80'
                   : location.nameKey === 'locations.reception'
-                  ? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80'
-                  : 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=1200&q=80'
+                  ? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80'
+                  : 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80'
                 }
                 alt={t(location.nameKey)}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-[1px]"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900/40 to-gray-800/50"></div>
             </div>
             
-            <div className="p-6 md:p-8 relative z-10">
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="p-4 bg-gradient-to-br from-cream-100 to-cream-200 dark:from-cream-700/40 dark:to-cream-600/40 rounded-xl shadow-md border border-cream-300/50 dark:border-cream-600/50">
-                  <MapPinIcon className="w-6 h-6 md:w-8 md:h-8 text-gold-600 dark:text-gold-400" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl md:text-3xl font-serif font-bold text-white drop-shadow-lg mb-2">
-                    {t(location.nameKey)}
-                  </h2>
-                  <p className="text-lg font-serif text-white/90 mb-1 drop-shadow-md">
-                    {location.address}
-                  </p>
-                  <p className="font-serif text-white/80 drop-shadow-md">
-                    {location.postalCode} {location.city}, {location.country}
-                  </p>
-                </div>
-              </div>
+            {/* Content */}
+            <div className="p-6 space-y-4">
+              {/* Title */}
+              <h3 className="text-xl md:text-2xl font-serif font-bold text-gray-900 dark:text-white">
+                {t(location.nameKey)}
+              </h3>
 
-              {/* Map Embed */}
-              {location.mapUrl && (
-                  <div className="mt-6 rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 shadow-md group-hover:border-cream-300 dark:group-hover:border-cream-600 transition-colors">
-                  <iframe
-                    src={location.mapUrl}
-                    width="100%"
-                    height="280"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full"
-                    title={t(location.nameKey)}
-                  ></iframe>
+              {/* Details */}
+              <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                {/* Location */}
+                <div className="flex items-center space-x-2 text-sm">
+                  <MapPinIcon className="w-4 h-4 text-gold-500 dark:text-gold-400 flex-shrink-0" />
+                  <span className="font-serif text-gray-700 dark:text-gray-300">{location.address}</span>
                 </div>
-              )}
 
-              {/* Directions Link */}
-              <div className="mt-6 flex justify-center">
+                {/* Address */}
+                <div className="text-sm text-gray-600 dark:text-gray-400 font-serif ml-6">
+                  {location.postalCode} {location.city}, {location.country}
+                </div>
+
+                {/* Map Embed */}
+                {location.mapUrl && (
+                  <div className="mt-4 rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 shadow-md">
+                    <iframe
+                      src={`${location.mapUrl}&style=feature:poi|visibility:off&style=feature:transit|visibility:off&style=feature:road.highway|element:labels|visibility:simplified`}
+                      width="100%"
+                      height="134"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="w-full"
+                      title={t(location.nameKey)}
+                    ></iframe>
+                  </div>
+                )}
+
+                {/* Directions Link */}
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                     `${location.address}, ${location.postalCode} ${location.city}, ${location.country}`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 px-5 py-2.5 bg-cream-100/90 dark:bg-cream-700/30 border-2 border-gold-400/80 dark:border-gold-500/70 text-gold-700 dark:text-gold-300 font-serif font-medium text-sm rounded-xl transition-all hover:bg-cream-200 dark:hover:bg-cream-600/50 hover:border-gold-500 dark:hover:border-gold-500 hover:shadow-md"
+                  className="inline-flex items-center space-x-2 text-sm text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 transition-colors font-serif font-medium"
                 >
+                  <ArrowSquareOutIcon className="w-4 h-4" />
                   <span>{t('locations.directions')}</span>
-                  <ArrowSquareOutIcon className="w-4 h-4 text-gold-600 dark:text-gold-400" />
                 </a>
               </div>
             </div>
@@ -217,7 +220,7 @@ export default function Locations() {
         {/* Knotenpunkt am Ende der Verbindungslinie – 36px unter letzter Karte, symmetrisch zum Startpunkt */}
         {dateOrder.length > 0 && (
           <div
-            className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[16px] z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
+            className="absolute left-1/2 bottom-0 -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-gold-300 dark:bg-gold-500 dark:border-gold-600 shadow-sm pointer-events-none"
             aria-hidden
           />
         )}

@@ -20,6 +20,21 @@ function ScrollToTop() {
   return null
 }
 
+function AppRoutes() {
+  const location = useLocation()
+  return (
+    <Routes location={location} key={location.pathname}>
+      <Route path="/" element={<Home />} />
+      <Route path="/timeline" element={<Timeline />} />
+      <Route path="/locations" element={<Locations />} />
+      <Route path="/outfits" element={<Outfits />} />
+      <Route path="/tips" element={<Tips />} />
+      <Route path="/rsvp" element={<RSVP />} />
+      <Route path="/photos" element={<Photos />} />
+    </Routes>
+  )
+}
+
 function App() {
   return (
     <ThemeProvider>
@@ -28,15 +43,7 @@ function App() {
         <Router>
           <ScrollToTop />
           <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/timeline" element={<Timeline />} />
-              <Route path="/locations" element={<Locations />} />
-              <Route path="/outfits" element={<Outfits />} />
-              <Route path="/tips" element={<Tips />} />
-              <Route path="/rsvp" element={<RSVP />} />
-              <Route path="/photos" element={<Photos />} />
-            </Routes>
+            <AppRoutes />
           </Layout>
         </Router>
         </EventDetailsProvider>
