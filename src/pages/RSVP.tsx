@@ -76,7 +76,7 @@ export default function RSVP() {
           boxSizing: 'border-box',
         }}
       >
-        <div className="max-w-2xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto bg-rose-200 dark:bg-gray-800 border-2 border-rose-200 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative backdrop-blur-sm animate-in slide-in-from-bottom-4 duration-300">
+        <div className="max-w-2xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto bg-cream-200 dark:bg-gray-800 border-2 border-cream-300 dark:border-cream-600/60 rounded-3xl p-12 md:p-16 text-center shadow-2xl relative backdrop-blur-sm animate-in slide-in-from-bottom-4 duration-300">
           <div className="relative z-10">
             <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rsvp-heart-pulse" aria-hidden>
               <svg
@@ -143,7 +143,7 @@ export default function RSVP() {
         </p>
       </div>
 
-      <div className="bg-rose-50 dark:bg-gray-800 border-2 border-rose-200 dark:border-gray-600 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
+      <div className="bg-cream-50 dark:bg-gray-800 border-2 border-cream-300 dark:border-gray-600 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
         <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
           {/* Attending */}
           <div>

@@ -10,6 +10,7 @@ import {
   CameraIcon,
 } from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
+import StaggerContainer, { StaggerItem } from '../components/StaggerContainer'
 
 const WEDDING_DATE = new Date(2026, 10, 27, 9, 0, 0) // 27. Nov 2026, 09:00
 
@@ -163,34 +164,34 @@ export default function Home() {
           <HeartIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />
           <div className="h-px w-12 bg-gold-300 dark:bg-gold-600" />
         </div>
-        <div className="space-y-4 md:space-y-5">
-          {quickLinks.map((link, index) => {
+        <StaggerContainer className="space-y-4 md:space-y-5">
+          {quickLinks.map((link) => {
             const Icon = link.icon
             return (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="group flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 overflow-hidden animate-in fade-in slide-in-from-bottom-2"
-                style={{ animationDelay: `${index * 100}ms`, animationDuration: '400ms', animationFillMode: 'both' }}
-              >
-                <div className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-cream-100 dark:bg-gray-700 border-2 border-gold-300 dark:border-gold-600 flex items-center justify-center shadow-inner group-hover:bg-gold-500 group-hover:border-gold-500 dark:group-hover:bg-gold-600 dark:group-hover:border-gold-500 transition-all duration-300">
-                  <Icon className="w-6 h-6 md:w-7 md:h-7 text-gold-600 dark:text-gold-400 group-hover:text-white transition-colors" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg md:text-xl font-serif font-semibold text-gray-900 dark:text-white tracking-tight group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors">
-                    {t(link.key)}
-                  </h3>
-                  <p className="text-sm font-serif text-gray-600 dark:text-gray-400 mt-0.5">
-                    {t(link.descKey)}
-                  </p>
-                </div>
-                <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <SparkleIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
-                </div>
-              </Link>
+              <StaggerItem key={link.path}>
+                <Link
+                  to={link.path}
+                  className="group flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 overflow-hidden block"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-cream-100 dark:bg-gray-700 border-2 border-gold-300 dark:border-gold-600 flex items-center justify-center shadow-inner group-hover:bg-gold-500 group-hover:border-gold-500 dark:group-hover:bg-gold-600 dark:group-hover:border-gold-500 transition-all duration-300">
+                    <Icon className="w-6 h-6 md:w-7 md:h-7 text-gold-600 dark:text-gold-400 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg md:text-xl font-serif font-semibold text-gray-900 dark:text-white tracking-tight group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors">
+                      {t(link.key)}
+                    </h3>
+                    <p className="text-sm font-serif text-gray-600 dark:text-gray-400 mt-0.5">
+                      {t(link.descKey)}
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <SparkleIcon className="w-5 h-5 text-gold-500 dark:text-gold-400" />
+                  </div>
+                </Link>
+              </StaggerItem>
             )
           })}
-        </div>
+        </StaggerContainer>
       </section>
     </div>
   )

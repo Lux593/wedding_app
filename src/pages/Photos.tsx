@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { CaretLeftIcon, CaretRightIcon, CameraIcon, XIcon } from '@phosphor-icons/react'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -88,12 +89,28 @@ export default function Photos() {
       </div>
 
       {/* Photo Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: { staggerChildren: 0.04, delayChildren: 0.1 },
+          },
+        }}
+      >
         {weddingPhotos.map((image) => (
-          <div
+          <motion.div
             key={image.id}
+            variants={{
+              hidden: { opacity: 0, scale: 0.95 },
+              visible: { opacity: 1, scale: 1.0 },
+            }}
+            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            whileHover={{ scale: 1.05 }}
             onClick={() => setSelectedImage(image.id)}
-            className="group relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700 rounded-2xl overflow-hidden cursor-pointer hover:scale-105 transition-all shadow-lg hover:shadow-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-gold-400 dark:hover:border-gold-600"
+            className="group relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700 rounded-2xl overflow-hidden cursor-pointer transition-shadow shadow-lg hover:shadow-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-gold-400 dark:hover:border-gold-600"
           >
             <img
               src={image.url}
@@ -101,15 +118,22 @@ export default function Photos() {
               className="w-full h-full object-cover"
               loading="lazy"
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Lightbox Modal – Portal, damit nicht vom Layout abgeschnitten; scrollbar bei hohen Fotos */}
-      {selectedImage !== null && createPortal(
-        <div
-          className="fixed inset-0 top-0 z-[110] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm animate-in fade-in duration-300"
-        >
+      {/* Lightbox Modal – Portal mit AnimatePresence */}
+      {createPortal(
+        <AnimatePresence>
+          {selectedImage !== null && (
+            <motion.div
+              key="photos-lightbox"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 top-0 z-[110] bg-black/95 flex flex-col items-center justify-center min-h-screen overflow-hidden p-4 pt-16 pb-8 backdrop-blur-sm"
+            >
           {/* Schließen-Button oben rechts, gleiches Design wie Vor/Zurück, fixiert */}
           <button
             onClick={() => setSelectedImage(null)}
@@ -118,13 +142,19 @@ export default function Photos() {
           >
             <XIcon className="w-6 h-6" />
           </button>
-          <div className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0 px-4 animate-in slide-in-from-bottom-4 duration-300" onClick={(e) => e.stopPropagation()}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.35 }}
+            className="flex items-center justify-center min-h-[70vh] w-full max-w-6xl flex-shrink-0 px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <img
               src={weddingPhotos.find(img => img.id === selectedImage)?.url}
               alt={weddingPhotos.find(img => img.id === selectedImage)?.alt}
               className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-2xl shadow-2xl"
             />
-          </div>
+          </motion.div>
           {/* Vor/Zurück-Buttons fixiert am unteren Bildschirmrand */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10" onClick={(e) => e.stopPropagation()}>
             <button
@@ -144,7 +174,9 @@ export default function Photos() {
               <CaretRightIcon className="w-8 h-8" />
             </button>
           </div>
-        </div>,
+            </motion.div>
+          )}
+        </AnimatePresence>,
         document.body
       )}
 

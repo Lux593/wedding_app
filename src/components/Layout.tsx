@@ -1,5 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import AnimatedPage from './AnimatedPage'
 import {
   ListIcon,
   XIcon,
@@ -102,10 +104,16 @@ export default function Layout({ children }: LayoutProps) {
     return () => { document.body.style.overflow = prev }
   }, [isMenuOpen])
 
+  // Sidebar bei Navigation schließen (verhindert Blur/Overlay nach Seitenwechsel)
+  useEffect(() => {
+    setIsMenuOpen(false)
+    setIsLangMenuOpen(false)
+  }, [location.pathname])
+
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="h-screen flex flex-col overflow-hidden bg-white dark:bg-gray-900">
       {/* Header */}
-      <header className="sticky top-0 z-[100] bg-gray-50/98 dark:bg-gray-950/98 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+      <header className="flex-shrink-0 z-[100] bg-gray-50/98 dark:bg-gray-950/98 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -150,8 +158,15 @@ export default function Layout({ children }: LayoutProps) {
                       {languages.find(l => l.code === language)?.flagComponent || <GlobeIcon className="w-4 h-4" />}
                     </span>
                   </button>
+                  <AnimatePresence>
                   {isLangMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50"
+                    >
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
@@ -172,8 +187,9 @@ export default function Layout({ children }: LayoutProps) {
                           )}
                         </button>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
+                  </AnimatePresence>
                 </div>
                 <button
                   onClick={toggleTheme}
@@ -206,11 +222,13 @@ export default function Layout({ children }: LayoutProps) {
 
       </header>
 
-      {/* Main Content */}
-      <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 min-h-[calc(100vh-12rem)] transition-all duration-300 ${isMenuOpen ? 'md:blur-none blur-md pointer-events-none md:pointer-events-auto' : ''}`}>
-        <div key={location.pathname} className="page-transition page-enter">
-          {children}
-        </div>
+      {/* Main Content – füllt Rest des Screens, scrollt intern */}
+      <main className={`flex-1 min-h-0 overflow-y-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 transition-all duration-300 ${isMenuOpen ? 'md:blur-none blur-md pointer-events-none md:pointer-events-auto' : ''}`}>
+        <AnimatePresence mode="wait">
+          <AnimatedPage key={location.pathname}>
+            {children}
+          </AnimatedPage>
+        </AnimatePresence>
       </main>
 
       {/* Mobile Menu Overlay – nach Main gerendert, damit Backdrop Klicks erhält */}
@@ -255,8 +273,15 @@ export default function Layout({ children }: LayoutProps) {
                 >
                   <GlobeIcon className="w-5 h-5" />
                 </button>
+                <AnimatePresence>
                 {isLangMenuOpen && (
-                  <div className="absolute left-0 bottom-full mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute left-0 bottom-full mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50"
+                  >
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
@@ -277,8 +302,9 @@ export default function Layout({ children }: LayoutProps) {
                         )}
                       </button>
                     ))}
-                  </div>
+                  </motion.div>
                 )}
+                </AnimatePresence>
               </div>
               <button
                 onClick={toggleTheme}
@@ -298,7 +324,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Footer – ausgeblendet wenn Event-Details offen */}
       {!isEventDetailsOpen && (
-      <footer className={`mt-8 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
+      <footer className={`flex-shrink-0 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 ${isMenuOpen ? 'pointer-events-none md:pointer-events-auto' : ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-sm font-serif text-gray-600 dark:text-gray-400 flex items-center justify-center space-x-2">
             <HeartIcon className="w-4 h-4 text-gold-500 dark:text-gold-400" />

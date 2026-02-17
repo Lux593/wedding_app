@@ -90,19 +90,19 @@ export default function Tips() {
       id: 'restaurant',
       name: 'Restaurants',
       icon: ForkKnifeIcon,
-      color: 'from-rose-500/40 to-pink-500/50',
+      color: 'from-amber-500/40 to-amber-600/50',
     },
     {
       id: 'activity',
       name: 'Aktivitäten',
       icon: TrendUpIcon,
-      color: 'from-blue-500/40 to-cyan-500/50',
+      color: 'from-slate-500/40 to-slate-600/50',
     },
     {
       id: 'sightseeing',
       name: 'Sehenswürdigkeiten',
       icon: BinocularsIcon,
-      color: 'from-purple-500/40 to-indigo-500/50',
+      color: 'from-stone-500/40 to-stone-600/50',
     },
   ]
 
@@ -157,14 +157,14 @@ export default function Tips() {
               <div key={category.id} className="relative space-y-4">
                 {isFirst && (
                   <div
-                    className="absolute left-1/2 -top-[24px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                    className="absolute left-1/2 -top-[24px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                     aria-hidden
                   />
                 )}
                 {/* Category Header */}
                 <button
                   onClick={() => toggleCategory(category.id)}
-                  className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
+                  className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
                 >
                   <div className="flex items-center justify-center">
                     <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -194,7 +194,7 @@ export default function Tips() {
                   {categoryTips.map((tip, tipIndex) => (
                     <div
                       key={tipIndex}
-                      className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-rose-200 dark:border-gray-700 hover:border-gold-400 dark:hover:border-gold-500 hover:-translate-y-2 bg-white dark:bg-gray-800"
+                      className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-cream-300 dark:border-gray-700 hover:border-gold-400 dark:hover:border-gold-500 hover:-translate-y-2 bg-white dark:bg-gray-800"
                     >
                       {/* Image */}
                       {tip.imageUrl && (

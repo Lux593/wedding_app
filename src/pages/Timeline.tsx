@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   SparkleIcon,
   ArrowRightIcon,
@@ -20,6 +21,7 @@ import {
 import { useLanguage } from '../contexts/LanguageContext'
 import { useEventDetails } from '../contexts/EventDetailsContext'
 import { getOutfitRecIcon } from '../lib/outfitRecIcons'
+import { EVENT_GRADIENTS, OUTFIT_COLORS } from '../lib/colors'
 
 interface EventDetails {
   location?: {
@@ -51,6 +53,7 @@ interface TimelineEvent {
   imageUrl: string
   bgColor: string
   buttonColor: string
+  accentColor: string
   details: EventDetails
 }
 
@@ -73,8 +76,9 @@ export default function Timeline() {
       descKey: 'timeline.ceremonyDesc',
       icon: CalendarBlankIcon,
       imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-      bgColor: 'from-blue-900/40 to-blue-800/50',
-      buttonColor: 'from-blue-400/80 to-blue-500/80 hover:from-blue-400 hover:to-blue-500',
+      bgColor: EVENT_GRADIENTS.ceremony.bg,
+      buttonColor: EVENT_GRADIENTS.ceremony.button,
+      accentColor: EVENT_GRADIENTS.ceremony.accent,
       details: {
         location: {
           nameKey: 'locations.ceremony',
@@ -87,12 +91,7 @@ export default function Timeline() {
         outfits: {
           men: ['outfits.rec.suitJacket', 'outfits.rec.lightShirts', 'outfits.rec.elegantFootwear'],
           women: ['outfits.rec.dressOrSuit', 'outfits.rec.hatsOptional', 'outfits.rec.elegantShoes'],
-          colors: [
-            { nameKey: 'outfits.color.blue', hex: '#3B82F6' },
-            { nameKey: 'outfits.color.gray', hex: '#6B7280' },
-            { nameKey: 'outfits.color.beige', hex: '#D4A574' },
-            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
-          ],
+          colors: [...OUTFIT_COLORS.formal],
           tagKey: 'outfits.tag.formal',
         },
         expectations: [
@@ -110,8 +109,9 @@ export default function Timeline() {
       descKey: 'timeline.cocktailDesc',
       icon: ConfettiIcon,
       imageUrl: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80',
-      bgColor: 'from-pink-900/40 to-purple-900/50',
-      buttonColor: 'from-pink-400/80 to-pink-500/80 hover:from-pink-400 hover:to-pink-500',
+      bgColor: EVENT_GRADIENTS.cocktail.bg,
+      buttonColor: EVENT_GRADIENTS.cocktail.button,
+      accentColor: EVENT_GRADIENTS.cocktail.accent,
       details: {
         location: {
           nameKey: 'locations.reception',
@@ -124,11 +124,7 @@ export default function Timeline() {
         outfits: {
           men: ['outfits.rec.jacketNoTie', 'outfits.rec.lightShirts', 'outfits.rec.leatherSneakers'],
           women: ['outfits.rec.cocktailDress', 'outfits.rec.blouseSkirt', 'outfits.rec.wedgeSandals'],
-          colors: [
-            { nameKey: 'outfits.color.pastel', hex: '#FBCFE8' },
-            { nameKey: 'outfits.color.goldAccent', hex: '#FCD34D' },
-            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
-          ],
+          colors: [...OUTFIT_COLORS.smartCasual],
           tagKey: 'outfits.tag.smartCasual',
         },
         drinks: [
@@ -160,8 +156,9 @@ export default function Timeline() {
       descKey: 'timeline.photosDesc',
       icon: CameraIcon,
       imageUrl: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80',
-      bgColor: 'from-purple-900/40 to-indigo-900/50',
-      buttonColor: 'from-purple-400/80 to-purple-500/80 hover:from-purple-400 hover:to-purple-500',
+      bgColor: EVENT_GRADIENTS.photos.bg,
+      buttonColor: EVENT_GRADIENTS.photos.button,
+      accentColor: EVENT_GRADIENTS.photos.accent,
       details: {
         location: {
           nameKey: 'locations.reception',
@@ -174,12 +171,7 @@ export default function Timeline() {
         outfits: {
           men: ['outfits.rec.suitJacket', 'outfits.rec.lightShirts', 'outfits.rec.elegantFootwear'],
           women: ['outfits.rec.dressOrSuit', 'outfits.rec.elegantAccessories', 'outfits.rec.elegantShoes'],
-          colors: [
-            { nameKey: 'outfits.color.blue', hex: '#3B82F6' },
-            { nameKey: 'outfits.color.gray', hex: '#6B7280' },
-            { nameKey: 'outfits.color.beige', hex: '#D4A574' },
-            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
-          ],
+          colors: [...OUTFIT_COLORS.formal],
           tagKey: 'outfits.tag.formal',
         },
         expectations: [
@@ -198,8 +190,9 @@ export default function Timeline() {
       descKey: 'timeline.dinnerDesc',
       icon: CookingPotIcon,
       imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
-      bgColor: 'from-emerald-900/40 to-teal-900/50',
-      buttonColor: 'from-emerald-300/80 to-emerald-400/80 hover:from-emerald-300 hover:to-emerald-400',
+      bgColor: EVENT_GRADIENTS.dinner.bg,
+      buttonColor: EVENT_GRADIENTS.dinner.button,
+      accentColor: EVENT_GRADIENTS.dinner.accent,
       details: {
         location: {
           nameKey: 'locations.reception',
@@ -212,12 +205,7 @@ export default function Timeline() {
         outfits: {
           men: ['outfits.rec.darkSuit', 'outfits.rec.tieBow', 'outfits.rec.leatherShoes'],
           women: ['outfits.rec.festiveDress', 'outfits.rec.elegantAccessories', 'outfits.rec.heels'],
-          colors: [
-            { nameKey: 'outfits.color.darkBlue', hex: '#1E3A8A' },
-            { nameKey: 'outfits.color.black', hex: '#000000' },
-            { nameKey: 'outfits.color.goldAccent', hex: '#FCD34D' },
-            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
-          ],
+          colors: [...OUTFIT_COLORS.festive],
           tagKey: 'outfits.tag.festive',
         },
         drinks: [
@@ -249,8 +237,9 @@ export default function Timeline() {
       descKey: 'timeline.partyDesc',
       icon: ConfettiIcon,
       imageUrl: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80',
-      bgColor: 'from-cream-600/40 to-cream-500/50',
-      buttonColor: 'from-pink-300/80 to-pink-400/80 hover:from-pink-300 hover:to-pink-400',
+      bgColor: EVENT_GRADIENTS.party.bg,
+      buttonColor: EVENT_GRADIENTS.party.button,
+      accentColor: EVENT_GRADIENTS.party.accent,
       details: {
         location: {
           nameKey: 'locations.reception',
@@ -263,11 +252,7 @@ export default function Timeline() {
         outfits: {
           men: ['outfits.rec.jacketOff', 'outfits.rec.comfortableShoes', 'outfits.rec.looseShirts'],
           women: ['outfits.rec.dancingShoes', 'outfits.rec.dressStays', 'outfits.rec.changeShoes'],
-          colors: [
-            { nameKey: 'outfits.color.allColors', hex: '#9333EA' },
-            { nameKey: 'outfits.color.goldAccent', hex: '#FCD34D' },
-            { nameKey: 'outfits.color.festive', hex: '#EC4899' },
-          ],
+          colors: [...OUTFIT_COLORS.party],
           tagKey: 'outfits.tag.party',
         },
         dj: 'DJ Soundwave',
@@ -301,8 +286,9 @@ export default function Timeline() {
       descKey: 'timeline.breakfastDesc',
       icon: CookingPotIcon,
       imageUrl: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80',
-      bgColor: 'from-orange-900/40 to-amber-900/50',
-      buttonColor: 'from-orange-400/80 to-amber-500/80 hover:from-orange-400 hover:to-amber-500',
+      bgColor: EVENT_GRADIENTS.breakfast.bg,
+      buttonColor: EVENT_GRADIENTS.breakfast.button,
+      accentColor: EVENT_GRADIENTS.breakfast.accent,
       details: {
         location: {
           nameKey: 'locations.breakfast',
@@ -315,12 +301,7 @@ export default function Timeline() {
         outfits: {
           men: ['outfits.rec.casualJacket', 'outfits.rec.jeansChinos', 'outfits.rec.comfortableShoes'],
           women: ['outfits.rec.casualDress', 'outfits.rec.comfortableShoes', 'outfits.rec.casualAccessories'],
-          colors: [
-            { nameKey: 'outfits.color.beige', hex: '#D4A574' },
-            { nameKey: 'outfits.color.cream', hex: '#FFF2CC' },
-            { nameKey: 'outfits.color.pastel', hex: '#FBCFE8' },
-            { nameKey: 'outfits.color.white', hex: '#FFFFFF' },
-          ],
+          colors: [...OUTFIT_COLORS.casual],
           tagKey: 'outfits.tag.casual',
         },
         drinks: [
@@ -403,14 +384,14 @@ export default function Timeline() {
               {/* Knotenpunkt oberhalb der ersten Kachel */}
               {isFirst && (
                 <div
-                  className="absolute left-1/2 -top-[24px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-rose-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
+                  className="absolute left-1/2 -top-[24px] -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-gold-500 bg-cream-200 dark:bg-gray-800 dark:border-gold-500 shadow-sm pointer-events-none"
                   aria-hidden
                 />
               )}
               {/* Date Header */}
               <button
                 onClick={toggleDate}
-                className="relative z-10 w-full text-center p-6 rounded-2xl bg-rose-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
+                className="relative z-10 w-full text-center p-6 rounded-2xl bg-cream-200 dark:bg-gray-800 border-2 border-gold-400 dark:border-gray-600 shadow-md hover:shadow-lg hover:border-gold-500 dark:hover:border-gold-600 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-center">
                   <h2 className="text-2xl md:text-3xl font-serif font-semibold text-gray-900 dark:text-white mb-0">
@@ -437,11 +418,14 @@ export default function Timeline() {
                   isOpen ? 'opacity-100 scale-y-100 max-h-[10000px]' : 'opacity-0 scale-y-95 max-h-0 overflow-hidden'
                 }`}
               >
-                {dayEvents.map((event, index) => {
-          return (
-            <div
+                {dayEvents.map((event, index) => (
+            <motion.div
               key={index}
-              className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-cream-300/30 dark:border-cream-600/50 hover:border-gold-400 dark:hover:border-gold-500 hover:-translate-y-2"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300 border-2 border-cream-300/30 dark:border-cream-600/50 hover:border-gold-400 dark:hover:border-gold-500"
             >
               {/* Background Image with Overlay */}
               <div className="absolute inset-0">
@@ -489,10 +473,9 @@ export default function Timeline() {
               </div>
 
               {/* Decorative Bottom Accent */}
-              <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${event.buttonColor.replace('/80', '').replace('hover:', '')} shadow-lg`}></div>
-            </div>
-                )
-              })}
+              <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${event.accentColor} shadow-lg`}></div>
+            </motion.div>
+              ))}
               </div>
             </div>
           )
@@ -509,9 +492,18 @@ export default function Timeline() {
         </div>
       )}
 
-      {/* Event Details Modal - Portal, damit fixed nicht vom Layout-Transform abgeschnitten wird */}
-      {selectedEvent && createPortal(
-        <div className="fixed inset-0 top-16 md:top-20 z-50 bg-rose-50 dark:bg-gray-900 overflow-y-auto rounded-t-3xl animate-in fade-in slide-in-from-bottom-4 duration-300">
+      {/* Event Details Modal - Portal mit AnimatePresence für sanftes Ein-/Ausblenden */}
+      {createPortal(
+        <AnimatePresence>
+          {selectedEvent && (
+            <motion.div
+              key="timeline-modal"
+              initial={{ opacity: 0, y: '10%' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: '10%' }}
+              transition={{ type: 'tween', duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="fixed inset-0 top-16 md:top-20 z-50 bg-cream-50 dark:bg-gray-900 overflow-y-auto rounded-t-3xl"
+            >
           {/* Close Button */}
           <button
             onClick={() => setSelectedEvent(null)}
@@ -742,7 +734,9 @@ export default function Timeline() {
                 </div>
               )}
           </div>
-        </div>,
+            </motion.div>
+          )}
+        </AnimatePresence>,
         document.body
       )}
     </>

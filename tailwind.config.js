@@ -31,6 +31,13 @@ export default {
           500: '#F5E6D3',  // Haupt Creme
           600: '#E8D4B8',  // Dunkleres Creme
           700: '#DBC29D',  // Sehr dunkles Creme
+          800: '#CEB88A',  // Warmes Creme
+          900: '#C4A77D',  // Sand/Creme
+        },
+        ivory: {
+          50: '#FAFAF8',
+          100: '#F5F3F0',
+          200: '#EDE9E3',
         },
       },
       fontFamily: {
